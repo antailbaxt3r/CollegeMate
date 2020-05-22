@@ -74,7 +74,7 @@ var config = {
         }
     },
     google: {
-        CLIENT_ID: process.env.CLIENT_ID || '796324132621-49obsp3evebs86otli49l0oo0kcnv618.apps.googleusercontent.com',
+        CLIENT_ID: process.env.CLIENT_ID || '480147456770-btcj5q928eoai1qn2ftsfsv9q7tmo3oo.apps.googleusercontent.com',
         CLIENT_SECRET: process.env.CLIENT_SECRET
     },
     exam: {

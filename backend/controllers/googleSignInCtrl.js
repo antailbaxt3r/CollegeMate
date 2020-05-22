@@ -2,6 +2,7 @@ var { OAuth2Client } = require('google-auth-library');
 var jwt = require('jsonwebtoken');
 
 const config = require('../config/config')
+const db = require('../models/db')
 
 module.exports.checkUserGoogle = async(req, res) => {
     //const CLIENT_ID = '498233300103-3p9u6r2rmlru42i40d421ju1ljosdca9.apps.googleusercontent.com'
@@ -41,6 +42,7 @@ module.exports.checkUserGoogle = async(req, res) => {
                 db.public.login.create(create_object)
                     .then(login_data => {
                         // The payload of the auth-token
+                        console.log("LOGIN DATA: ", login_data)
                         var auth_data = {
                             email: login_data.email,
                             id: login_data.id,
@@ -60,11 +62,12 @@ module.exports.checkUserGoogle = async(req, res) => {
                         });
                     })
                     .catch (err => {
-                        // console.log(err);
+                        console.log(err);
                         return res.status(500).json({
                             success: false,
                             msg: 'Internal server error'
                         });
+                        
                     })
             } else if (user) {
                 // The user has already signed-in through google
@@ -87,7 +90,7 @@ module.exports.checkUserGoogle = async(req, res) => {
                 });
             }
         } catch (err) {
-            // console.log(err);
+            console.log(err);
             return res.status(500).json({
                 success: false,
                 error: 'Internal server error.'
