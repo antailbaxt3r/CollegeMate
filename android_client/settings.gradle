@@ -1,0 +1,2 @@
+rootProject.name='CollegeMate'
+include ':app'
