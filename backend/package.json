@@ -4,8 +4,19 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node App.js",
+    "dev": "nodemon App.js"
   },
   "author": "antailbaxt3r",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "google-auth-library": "^6.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "path": "^0.12.7"
+  }
 }
