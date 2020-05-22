@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "480147456770",
+    "firebase_url": "https://collegemate-8fcf0.firebaseio.com",
+    "project_id": "collegemate-8fcf0",
+    "storage_bucket": "collegemate-8fcf0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:480147456770:android:289f9d273c1c32e012381b",
+        "android_client_info": {
+          "package_name": "com.antailbaxt3r.collegemate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "480147456770-dv9gsjgirspua86gqsmvk9dp64l4bb8t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.antailbaxt3r.collegemate",
+            "certificate_hash": "7268adab26487ffb5a5e506e2db0a30edbcb5865"
+          }
+        },
+        {
+          "client_id": "480147456770-btcj5q928eoai1qn2ftsfsv9q7tmo3oo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOy1JRRQfHO7TD-vbFuHqxcw4PQiXaUOc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "480147456770-btcj5q928eoai1qn2ftsfsv9q7tmo3oo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
