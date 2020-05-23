@@ -108,8 +108,6 @@ public class SplashActivity extends AppCompatActivity implements GoogleApiClient
 //                e.printStackTrace();
 //            }
 
-                Log.i("id", account.getIdToken());
-
                 // you can store user data to SharedPreference
                 AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
                 firebaseAuthWithGoogle(credential);
