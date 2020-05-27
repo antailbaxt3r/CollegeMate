@@ -1,4 +1,4 @@
-package com.antailbaxt3r.collegemate;
+package com.antailbaxt3r.collegemate.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.antailbaxt3r.collegemate.R;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -24,7 +25,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
-public class SplashActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener{
+public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener{
 
     private SignInButton loginWithGoogle;
     private FirebaseAuth.AuthStateListener authStateListener;
@@ -130,13 +131,13 @@ public class SplashActivity extends AppCompatActivity implements GoogleApiClient
                         Log.d("Login Attempt", "signInWithCredential:onComplete:" + task.isSuccessful());
                         if(task.isSuccessful()){
 
-                            Toast.makeText(SplashActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
 
                             gotoHome();
                         }else{
                             Log.w("Login Attempt", "signInWithCredential" + task.getException().getMessage());
                             task.getException().printStackTrace();
-                            Toast.makeText(SplashActivity.this, "Authentication failed.",
+                            Toast.makeText(LoginActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                         }
 
@@ -145,14 +146,14 @@ public class SplashActivity extends AppCompatActivity implements GoogleApiClient
     }
 
     private void gotoHome() {
-        Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();
     }
 
     private void goToOnboarding() {
-        Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();

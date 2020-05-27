@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorBackground"
     tools:context=".activities.MainActivity">
 
     <TextView
@@ -12,11 +13,10 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/secular_one"
         android:lineSpacingExtra="-40dp"
-        android:text="Hello world"
-        android:textColor="@color/black"
+        android:text="@string/college_nmate"
+        android:textColor="@color/white"
         android:textSize="72sp"
+        android:layout_margin="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
