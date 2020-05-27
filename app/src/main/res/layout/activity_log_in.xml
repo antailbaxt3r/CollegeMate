@@ -17,7 +17,7 @@
         android:fontFamily="@font/secular_one"
         android:textSize="72sp"
         android:layout_marginHorizontal="10dp"
-        android:lineSpacingExtra="-45sp"/>
+        android:lineSpacingExtra="-40sp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
