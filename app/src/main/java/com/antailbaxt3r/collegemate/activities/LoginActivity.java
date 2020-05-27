@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import com.antailbaxt3r.collegemate.R;
 import com.google.android.gms.auth.api.Auth;
@@ -27,7 +28,7 @@ import com.google.firebase.auth.GoogleAuthProvider;
 
 public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener{
 
-    private SignInButton loginWithGoogle;
+    private CardView loginWithGoogle;
     private FirebaseAuth.AuthStateListener authStateListener;
     private FirebaseUser user;
     private GoogleApiClient googleApiClient;
