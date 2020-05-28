@@ -14,7 +14,7 @@ public interface APIInterface {
 
     @POST("api/google/signin")
     @FormUrlEncoded
-    Call<String> sendRegToken(@Field("id_token") String idtoken);
+    Call<POST> sendRegToken(@Field("id_token") String idtoken);
 
     
 }

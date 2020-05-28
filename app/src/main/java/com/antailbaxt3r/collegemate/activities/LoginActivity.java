@@ -12,6 +12,7 @@ import androidx.cardview.widget.CardView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.http.POST;
 
 import com.antailbaxt3r.collegemate.R;
 import com.antailbaxt3r.collegemate.retrofit.APIInterface;
@@ -155,17 +156,15 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     }
 
     private void oAuthVerification(String idtoken){
-        APIInterface apiInterface = RetrofitClient.getClient();
-        apiInterface.sendRegToken(idtoken).enqueue(new Callback<String>() {
+        RetrofitClient.getClient().sendRegToken(idtoken).enqueue(new Callback<POST>() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                Log.d("oAuth","Successfull");
+            public void onResponse(Call<POST> call, Response<POST> response) {
                 firebaseAuthWithGoogle(idtoken);
+                gotoHome();
             }
-
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                Log.d("error",t.getMessage());
+            public void onFailure(Call<POST> call, Throwable t) {
+
             }
         });
     }
@@ -174,6 +173,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
+        finish();
     }
 
     private void newUser(){
