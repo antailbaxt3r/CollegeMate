@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/dark_blue"
     android:orientation="vertical"
+    android:id="@+id/register_layout"
     tools:context=".activities.RegisterActivity">
 
     <TextView
@@ -24,6 +25,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="@drawable/top_left_rounded_rectangle">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -34,65 +36,68 @@
                 android:id="@+id/username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/rounded_rectangle_10dp"
-                android:padding="10dp"
-                android:layout_marginTop="70dp"
                 android:layout_marginHorizontal="20dp"
-                android:hint="Username"
+                android:layout_marginTop="70dp"
+                android:background="@drawable/rounded_rectangle_10dp"
                 android:fontFamily="@font/raleway_reg"
-                android:textColor="@color/dark_blue"/>
+                android:hint="Username"
+                android:padding="10dp"
+                android:textColor="@color/dark_blue" />
 
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/enrollment_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/rounded_rectangle_10dp"
-                android:padding="10dp"
                 android:layout_margin="20dp"
-                android:hint="Enrollment Id"
+                android:background="@drawable/rounded_rectangle_10dp"
                 android:fontFamily="@font/raleway_reg"
-                android:textColor="@color/dark_blue"/>
+                android:hint="Enrollment Id"
+                android:padding="10dp"
+                android:textColor="@color/dark_blue" />
 
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/year_of_study"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/rounded_rectangle_10dp"
-                android:padding="10dp"
                 android:layout_marginHorizontal="20dp"
-                android:hint="Year of study"
+                android:background="@drawable/rounded_rectangle_10dp"
                 android:fontFamily="@font/raleway_reg"
-                android:textColor="@color/dark_blue"/>
+                android:hint="Year of study"
+                android:padding="10dp"
+                android:textColor="@color/dark_blue" />
 
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/rounded_rectangle_10dp"
-                android:padding="10dp"
                 android:layout_margin="20dp"
-                android:hint="Phone Number"
+                android:background="@drawable/rounded_rectangle_10dp"
                 android:fontFamily="@font/raleway_reg"
-                android:textColor="@color/dark_blue"/>
+                android:hint="Phone Number"
+                android:padding="10dp"
+                android:textColor="@color/dark_blue" />
         </LinearLayout>
+
         <LinearLayout
+            android:id="@+id/register_submit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"
             android:layout_margin="20dp"
             android:background="@drawable/button_component">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Register"
-                android:fontFamily="@font/secular_one"
-                android:textColorHint="@color/white"
-                android:textSize="24sp"
-                android:textColor="@color/white"
-                android:layout_marginEnd="10dp"
                 android:layout_marginStart="50sp"
                 android:layout_marginTop="20sp"
-                android:textAlignment="textEnd"/>
+                android:layout_marginEnd="10dp"
+                android:fontFamily="@font/secular_one"
+                android:text="Register"
+                android:textAlignment="textEnd"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textSize="24sp" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

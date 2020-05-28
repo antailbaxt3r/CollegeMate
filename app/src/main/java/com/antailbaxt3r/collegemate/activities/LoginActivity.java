@@ -9,8 +9,13 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import com.antailbaxt3r.collegemate.R;
+import com.antailbaxt3r.collegemate.retrofit.APIInterface;
+import com.antailbaxt3r.collegemate.retrofit.RetrofitClient;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -111,8 +116,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 //            }
 
                 // you can store user data to SharedPreference
-                AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
-                firebaseAuthWithGoogle(credential);
+                oAuthVerification(account.getIdToken());
 
         }else{
             // Google Sign In failed, update UI appropriately
@@ -124,7 +128,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         }
     }
 
-    private void firebaseAuthWithGoogle(AuthCredential credential) {
+    private void firebaseAuthWithGoogle(String idToken) {
+        AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
         auth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -132,8 +137,11 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                         Log.d("Login Attempt", "signInWithCredential:onComplete:" + task.isSuccessful());
                         if(task.isSuccessful()){
 
+                            if(task.getResult().getAdditionalUserInfo().isNewUser()){
+                                newUser();
+                                return;
+                            }
                             Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
-
                             gotoHome();
                         }else{
                             Log.w("Login Attempt", "signInWithCredential" + task.getException().getMessage());
@@ -146,18 +154,32 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 });
     }
 
+    private void oAuthVerification(String idtoken){
+        APIInterface apiInterface = RetrofitClient.getClient();
+        apiInterface.sendRegToken(idtoken).enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                Log.d("oAuth","Successfull");
+                firebaseAuthWithGoogle(idtoken);
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Log.d("error",t.getMessage());
+            }
+        });
+    }
+
     private void gotoHome() {
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
-        finish();
     }
 
-    private void goToOnboarding() {
-        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-        finish();
+    private void newUser(){
+        Intent i = new Intent(this,RegisterActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(i);
     }
 
     @Override
