@@ -66,14 +66,14 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         };
 
         GoogleSignInOptions gso =  new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.web_client_id))//you can also use R.string.default_web_client_id
-                .requestEmail()
-                .build();
+            .requestIdToken(getString(R.string.web_client_id))//you can also use R.string.default_web_client_id
+            .requestEmail()
+            .build();
 
         googleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this,this)
-                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .build();
+            .enableAutoManage(this,this)
+            .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+            .build();
 
         binding.loginGoogleSignin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,14 +109,18 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             call.enqueue(new Callback<TokenResponseModel>() {
                 @Override
                 public void onResponse(Call<TokenResponseModel> call, Response<TokenResponseModel> response) {
-                    if(response.isSuccessful() && response.code() == 200 && response.body().getSuccess().equals("true")){
+                    if(response.isSuccessful() && response.code() == 200){
                         TokenResponseModel tokenModel = response.body();
-                        prefs.saveEmail(account.getEmail());
-                        prefs.saveName(account.getDisplayName());
-                        prefs.saveToken(tokenModel.getAuthToken());
-                        prefs.saveNewUser(tokenModel.getNewUser());
-                    }else{
-                        Toast.makeText(LoginActivity.this, "Something went wrong!", Toast.LENGTH_SHORT).show();
+                        if(tokenModel.getSuccess()) {
+                            prefs.saveEmail(account.getEmail());
+                            prefs.saveName(account.getDisplayName());
+                            prefs.saveToken(tokenModel.getAuthToken());
+                            prefs.saveNewUser(tokenModel.getNewUser());
+                            AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
+                            firebaseAuthWithGoogle(credential);
+                        }else{
+                            Toast.makeText(LoginActivity.this, "Something went wrong!", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }
 
@@ -127,8 +131,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                     t.printStackTrace();
                 }
             });
-            AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
-            firebaseAuthWithGoogle(credential);
 
         }else{
             // Google Sign In failed, update UI appropriately
@@ -142,27 +144,27 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     private void firebaseAuthWithGoogle(AuthCredential credential) {
         auth.signInWithCredential(credential)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        Log.d("Login Attempt", "signInWithCredential:onComplete:" + task.isSuccessful());
-                        if(task.isSuccessful()){
+            .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    Log.d("Login Attempt", "signInWithCredential:onComplete:" + task.isSuccessful());
+                    if(task.isSuccessful()){
 
-                            Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
-                            if(prefs.getNewUser()){
-                                goToOnboarding();
-                            }else {
-                                gotoHome();
-                            }
-                        }else{
-                            Log.w("Login Attempt", "signInWithCredential" + task.getException().getMessage());
-                            task.getException().printStackTrace();
-                            Toast.makeText(LoginActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
+                        if(prefs.getNewUser()){
+                            goToOnboarding();
+                        }else {
+                            gotoHome();
                         }
-
+                    }else{
+                        Log.w("Login Attempt", "signInWithCredential" + task.getException().getMessage());
+                        task.getException().printStackTrace();
+                        Toast.makeText(LoginActivity.this, "Authentication failed.",
+                            Toast.LENGTH_SHORT).show();
                     }
-                });
+
+                }
+            });
     }
 
     private void gotoHome() {

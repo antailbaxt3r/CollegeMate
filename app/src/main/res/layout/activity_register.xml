@@ -33,25 +33,10 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingHorizontal="5dp"
                 android:background="@drawable/rounded_rectangle_10dp"
                 android:layout_marginTop="70dp"
                 android:layout_marginHorizontal="20dp">
-                <com.rengwuxian.materialedittext.MaterialEditText
-                    android:id="@+id/username"
-                    app:met_hideUnderline="true"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:hint="Username"
-                    android:fontFamily="@font/raleway_reg"
-                    android:textColor="@color/dark_blue"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/rounded_rectangle_10dp"
-                android:layout_margin="20dp">
                 <com.rengwuxian.materialedittext.MaterialEditText
                     android:id="@+id/enrollment_id"
                     android:layout_width="match_parent"
@@ -65,6 +50,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingHorizontal="5dp"
+                android:layout_marginTop="20dp"
                 android:background="@drawable/rounded_rectangle_10dp"
                 android:layout_marginHorizontal="20dp">
                 <com.rengwuxian.materialedittext.MaterialEditText
@@ -72,6 +59,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
+                    android:maxLength="1"
+                    android:inputType="number"
                     app:met_hideUnderline="true"
                     android:hint="Year of study"
                     android:fontFamily="@font/raleway_reg"
@@ -80,8 +69,20 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingHorizontal="5dp"
                 android:background="@drawable/rounded_rectangle_10dp"
-                android:layout_margin="20dp">
+                android:layout_margin="20dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="24sp"
+                    android:layout_margin="5dp"
+                    android:textAlignment="center"
+                    android:layout_gravity="center"
+                    android:textColor="@color/dark_blue"
+                    android:fontFamily="@font/raleway_reg"
+                    android:text="+91"/>
                 <com.rengwuxian.materialedittext.MaterialEditText
                     android:id="@+id/phone"
                     android:layout_width="match_parent"
@@ -90,6 +91,8 @@
                     android:padding="10dp"
                     app:met_hideUnderline="true"
                     android:hint="Phone Number"
+                    android:maxLength="10"
+                    android:inputType="number"
                     android:fontFamily="@font/raleway_reg"
                     android:textColor="@color/dark_blue"/>
             </LinearLayout>
