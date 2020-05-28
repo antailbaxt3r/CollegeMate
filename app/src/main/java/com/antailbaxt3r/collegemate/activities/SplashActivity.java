@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 
 import com.antailbaxt3r.collegemate.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,10 +24,12 @@ public class SplashActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     if(currentUser == null){
+                        Log.i("SPLASH SCREEN INTENT", "Not logged in");
                         Intent login = new Intent(SplashActivity.this, LoginActivity.class);
                         startActivity(login);
                         finish();
                     }else{
+                        Log.i("SPLASH SCREEN INTENT", "Logged in");
                         Intent main = new Intent(SplashActivity.this, MainActivity.class);
                         startActivity(main);
                         finish();

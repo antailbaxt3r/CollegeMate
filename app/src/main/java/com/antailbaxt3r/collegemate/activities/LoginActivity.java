@@ -11,6 +11,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import com.antailbaxt3r.collegemate.R;
+import com.antailbaxt3r.collegemate.databinding.ActivityLogInBinding;
+import com.antailbaxt3r.collegemate.models.TokenResponseModel;
+import com.antailbaxt3r.collegemate.retrofit.RetrofitClient;
+import com.antailbaxt3r.collegemate.utils.SharedPrefs;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -26,24 +30,33 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener{
 
-    private CardView loginWithGoogle;
     private FirebaseAuth.AuthStateListener authStateListener;
     private FirebaseUser user;
     private GoogleApiClient googleApiClient;
     private FirebaseAuth auth;
+    private SharedPrefs prefs;
+    private ActivityLogInBinding binding;
 
     private static final int GOOGLE_SIGN_IN_REQUEST_CODE = 707;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_log_in);
-        attachID();
+        binding = ActivityLogInBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
+        prefs = new SharedPrefs(this);
         authStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -62,7 +75,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
 
-        loginWithGoogle.setOnClickListener(new View.OnClickListener() {
+        binding.loginGoogleSignin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
@@ -71,10 +84,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         });
 
 
-    }
-
-    private void attachID() {
-        loginWithGoogle = findViewById(R.id.login_google_signin);
     }
 
     @Override
@@ -95,24 +104,31 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         if(result.isSuccess()){
             GoogleSignInAccount account = result.getSignInAccount();
             Log.i("id", account.getIdToken());
-//            File file = new File(LoginActivity.this.getObbDir(), "text");
-//            if (!file.exists()) {
-//                file.mkdir();
-//            }
-//            try {
-//                File gpxfile = new File(file, "googleIdToken.txt");
-//                FileWriter writer = new FileWriter(gpxfile);
-//                writer.append(account.getIdToken());
-//                writer.flush();
-//                writer.close();
-//                Toast.makeText(LoginActivity.this, "Saved your text", Toast.LENGTH_LONG).show();
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
+            // you can store user data to SharedPreference
+            Call<TokenResponseModel> call = RetrofitClient.getClient().getToken(account.getIdToken());
+            call.enqueue(new Callback<TokenResponseModel>() {
+                @Override
+                public void onResponse(Call<TokenResponseModel> call, Response<TokenResponseModel> response) {
+                    if(response.isSuccessful() && response.code() == 200 && response.body().getSuccess().equals("true")){
+                        TokenResponseModel tokenModel = response.body();
+                        prefs.saveEmail(account.getEmail());
+                        prefs.saveName(account.getDisplayName());
+                        prefs.saveToken(tokenModel.getAuthToken());
+                        prefs.saveNewUser(tokenModel.getNewUser());
+                    }else{
+                        Toast.makeText(LoginActivity.this, "Something went wrong!", Toast.LENGTH_SHORT).show();
+                    }
+                }
 
-                // you can store user data to SharedPreference
-                AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
-                firebaseAuthWithGoogle(credential);
+                @Override
+                public void onFailure(Call<TokenResponseModel> call, Throwable t) {
+                    Toast.makeText(LoginActivity.this, "Something went wrong!", Toast.LENGTH_SHORT).show();
+                    Log.e("Login", t.getMessage());
+                    t.printStackTrace();
+                }
+            });
+            AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
+            firebaseAuthWithGoogle(credential);
 
         }else{
             // Google Sign In failed, update UI appropriately
@@ -133,8 +149,11 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                         if(task.isSuccessful()){
 
                             Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
-
-                            gotoHome();
+                            if(prefs.getNewUser()){
+                                goToOnboarding();
+                            }else {
+                                gotoHome();
+                            }
                         }else{
                             Log.w("Login Attempt", "signInWithCredential" + task.getException().getMessage());
                             task.getException().printStackTrace();
@@ -154,7 +173,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     }
 
     private void goToOnboarding() {
-        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();

@@ -12,10 +12,10 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-class RetrofitClient {
+public class RetrofitClient {
     private static APIInterface apiInterface;
 
-    static APIInterface getClient() {
+    public static APIInterface getClient() {
         if (apiInterface == null) {
             String BASE_URL = "https://collegemate-api.herokuapp.com/api/";
             Retrofit retrofit = new Retrofit.Builder()
