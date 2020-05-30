@@ -59,6 +59,12 @@ dependencies {
 
     //picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
+
+    //animated bottom navigation
+    implementation 'nl.joery.animatedbottombar:library:1.0.8'
+
+    //duo navigation drawer
+    implementation 'nl.psdcompany:duo-navigation-drawer:3.0.0'
 }
 
 apply plugin: 'com.google.gms.google-services'
