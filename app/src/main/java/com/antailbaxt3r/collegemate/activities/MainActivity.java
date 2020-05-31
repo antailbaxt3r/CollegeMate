@@ -1,9 +1,26 @@
 package com.antailbaxt3r.collegemate.activities;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+
+import com.antailbaxt3r.collegemate.R;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.tabs.TabLayout;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -17,7 +34,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
-
     private SharedPrefs prefs;
     private ActivityMainBinding drawerBinding;
     private AppBarMainBinding binding;
@@ -26,8 +42,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         drawerBinding = ActivityMainBinding.inflate(getLayoutInflater());
-        binding = AppBarMainBinding.inflate(getLayoutInflater());
         setContentView(drawerBinding.getRoot());
+        binding = drawerBinding.appBar;
 
         prefs = new SharedPrefs(this);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -44,10 +60,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initDrawer() {
-        drawerBinding.navView.setNavigationItemSelectedListener(item -> {
-            return false;
-        });
-        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerBinding.drawerLayout, R.string.open_drawer, R.string.close_drawer) {
+
+       ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerBinding.homeDrawer, R.string.open_drawer, R.string.close_drawer) {
             @Override
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
@@ -58,12 +72,27 @@ public class MainActivity extends AppCompatActivity {
                 super.onDrawerClosed(drawerView);
             }
         };
-        drawerBinding.drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        drawerBinding.homeDrawer.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
+
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.home_menu,menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         return super.onOptionsItemSelected(item);
+    }
+    @Override
+    public boolean onSupportNavigateUp() {
+        //Opening Drawer
+        drawerBinding.homeDrawer.openDrawer(Gravity.LEFT);
+        return super.onSupportNavigateUp();
     }
 }

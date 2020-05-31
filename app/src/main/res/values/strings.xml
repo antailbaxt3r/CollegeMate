@@ -2,6 +2,12 @@
     <string name="app_name">CollegeMate</string>
     <string name="web_client_id">480147456770-btcj5q928eoai1qn2ftsfsv9q7tmo3oo.apps.googleusercontent.com</string>
     <string name="college_nmate">College\nMate</string>
+<<<<<<< HEAD
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+=======
+>>>>>>> ef6e5938f32c4f516e81a1581defc2461b12aacd
     <string name="dashboard">Dashboard</string>
     <string name="timetable">Timetable</string>
     <string name="reminders">Reminders</string>
