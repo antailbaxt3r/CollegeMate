@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private SharedPrefs prefs;
     private ActivityMainBinding drawerBinding;
     private AppBarMainBinding binding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
