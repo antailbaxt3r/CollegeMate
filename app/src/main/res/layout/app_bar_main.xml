@@ -24,13 +24,11 @@
             app:menu="@menu/home_menu"
             app:title="" />
     </com.google.android.material.appbar.AppBarLayout>
-
     <FrameLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"/>
-
     <nl.joery.animatedbottombar.AnimatedBottomBar
         android:id="@+id/bottom_nav_bar"
         android:layout_gravity="bottom"

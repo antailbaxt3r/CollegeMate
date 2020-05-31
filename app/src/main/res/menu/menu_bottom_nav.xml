@@ -1,0 +1,14 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/tab_dashboard"
+        android:icon="@drawable/ic_baseline_dashboard_24"
+        android:title="@string/dashboard" />
+    <item
+        android:id="@+id/tab_timetable"
+        android:icon="@drawable/ic_baseline_calendar_today_24"
+        android:title="@string/timetable" />
+    <item
+        android:id="@+id/tab_reminders"
+        android:icon="@drawable/ic_baseline_timer_24"
+        android:title="@string/reminders" />
+</menu>
