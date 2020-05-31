@@ -14,6 +14,7 @@ import com.antailbaxt3r.collegemate.R;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 
+import com.antailbaxt3r.collegemate.adapters.HomeMenuAdapter;
 import com.antailbaxt3r.collegemate.databinding.ActivityMainBinding;
 import com.antailbaxt3r.collegemate.databinding.AppBarMainBinding;
 import com.antailbaxt3r.collegemate.utils.SharedPrefs;
@@ -44,6 +45,14 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(binding.toolbar);
         initDrawer();
 
+        initViewPager();
+
+    }
+
+    private void initViewPager(){
+        HomeMenuAdapter adapter = new HomeMenuAdapter(getSupportFragmentManager(),0);
+        binding.viewpager.setAdapter(adapter);
+        binding.bottomNavBar.setupWithViewPager(binding.viewpager);
     }
 
     private void initDrawer() {
