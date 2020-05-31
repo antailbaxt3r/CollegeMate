@@ -1,9 +1,6 @@
 package com.antailbaxt3r.collegemate.activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,19 +11,9 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.antailbaxt3r.collegemate.R;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.tabs.TabLayout;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
 
-import com.antailbaxt3r.collegemate.R;
 import com.antailbaxt3r.collegemate.databinding.ActivityMainBinding;
 import com.antailbaxt3r.collegemate.databinding.AppBarMainBinding;
 import com.antailbaxt3r.collegemate.utils.SharedPrefs;

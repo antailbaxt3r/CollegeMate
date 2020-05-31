@@ -22,7 +22,8 @@ public class TimeTableFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_time_table, container, false);
+        timeTableBinding = FragmentTimeTableBinding.inflate(inflater,container,false);
+        View root = timeTableBinding.getRoot();
         return root;
     }
 }

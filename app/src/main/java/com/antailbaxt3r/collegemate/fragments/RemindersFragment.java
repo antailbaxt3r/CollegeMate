@@ -18,12 +18,15 @@ public class RemindersFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_reminders, container, false);
+        remindersBinding =FragmentRemindersBinding.inflate(inflater,container,false);
+        View root = remindersBinding.getRoot();
+
+        return root;
     }
 }
