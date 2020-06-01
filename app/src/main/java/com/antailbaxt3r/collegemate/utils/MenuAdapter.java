@@ -6,6 +6,7 @@ import android.widget.BaseAdapter;
 
 import java.util.ArrayList;
 
+import androidx.fragment.app.FragmentManager;
 import nl.psdcompany.duonavigationdrawer.views.DuoOptionView;
 
 public class MenuAdapter extends BaseAdapter {

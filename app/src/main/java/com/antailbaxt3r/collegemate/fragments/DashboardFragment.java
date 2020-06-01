@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.antailbaxt3r.collegemate.R;
 import com.antailbaxt3r.collegemate.databinding.FragmentDashboardBinding;
 
 public class DashboardFragment extends Fragment {
@@ -22,7 +21,8 @@ public class DashboardFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
+        dashboardBinding = FragmentDashboardBinding.inflate(inflater,container,false);
+        View root = dashboardBinding.getRoot();
         return root;
     }
 }

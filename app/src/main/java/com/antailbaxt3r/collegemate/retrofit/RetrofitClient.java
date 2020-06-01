@@ -43,14 +43,11 @@ public class RetrofitClient {
 //                    builder.addHeader("X-AUTH-TOKEN", authToken);
 //                }
 //                request = builder.build();
-<<<<<<< HEAD
 //               String authToken = App.getInstance().getSessionManager().getX_AUTH_TOKEN();
 //               if (!StringUtils.isEmpty(authToken)) {
 //                  builder.addHeader("X-AUTH-TOKEN", authToken);
 //                }
 //               request = builder.build();
-=======
->>>>>>> ef6e5938f32c4f516e81a1581defc2461b12aacd
             return chain.proceed(request);
         });
         return httpClient.build();
