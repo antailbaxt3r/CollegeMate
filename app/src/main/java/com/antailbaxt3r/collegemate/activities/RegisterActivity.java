@@ -4,27 +4,22 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.Toast;
 
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.antailbaxt3r.collegemate.R;
 import com.antailbaxt3r.collegemate.databinding.ActivityRegisterBinding;
 import com.antailbaxt3r.collegemate.models.UserResponseModel;
 import com.antailbaxt3r.collegemate.retrofit.RetrofitClient;
 import com.antailbaxt3r.collegemate.utils.SharedPrefs;
-import com.rengwuxian.materialedittext.MaterialEditText;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class RegisterActivity extends AppCompatActivity {
-
     private ActivityRegisterBinding binding;
     private SharedPrefs prefs;
 

@@ -8,17 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.antailbaxt3r.collegemate.R;
 import com.antailbaxt3r.collegemate.databinding.FragmentRemindersBinding;
 
 public class RemindersFragment extends Fragment {
-
     FragmentRemindersBinding remindersBinding;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override

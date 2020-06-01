@@ -7,11 +7,10 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.antailbaxt3r.collegemate.databinding.FragmentTimeTableBinding;
-import com.antailbaxt3r.collegemate.R;
 
 public class TimeTableFragment extends Fragment {
-
     FragmentTimeTableBinding timeTableBinding;
 
     @Override
