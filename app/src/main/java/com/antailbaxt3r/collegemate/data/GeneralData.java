@@ -8,8 +8,7 @@ import java.util.List;
 public class GeneralData {
     //Objects which are frequently used
     public static List<Subject> subjects = new ArrayList<>();
-
-
+    
     public static List<Subject> getSubjects(){
         return subjects;
     }

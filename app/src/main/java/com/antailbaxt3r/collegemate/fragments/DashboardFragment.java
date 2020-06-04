@@ -83,6 +83,10 @@ public class DashboardFragment extends Fragment {
     }
 
     void setSubjectRecyclerView(List<Subject> subjectData){
+        if(subjectData.size() !=0){
+            dashboardBinding.subjectMore.setText("View More");
+        }
+
         //Setting maximum subject size = 5
         List<Subject> croppedList  = new ArrayList<>();
         for(int i =0; i<5 && i<subjectData.size();i++){

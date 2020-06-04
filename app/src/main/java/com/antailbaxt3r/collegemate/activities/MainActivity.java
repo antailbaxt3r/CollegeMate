@@ -46,11 +46,6 @@ public class MainActivity extends AppCompatActivity {
         initDrawer();
 
         initViewPager();
-
-        //Logging oAuth Token
-        SharedPrefs prefs = new SharedPrefs(this);
-        Log.i("oAuth Token",prefs.getToken());
-
     }
 
     private void initViewPager(){
