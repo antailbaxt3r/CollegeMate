@@ -12,7 +12,6 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:fontFamily="@font/secular_one"
         android:text="DashBoard"
         android:textColor="@color/dark_blue"
@@ -20,7 +19,9 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="top"
         android:layout_weight="1"
         android:orientation="vertical">
 
@@ -32,29 +33,35 @@
             android:textSize="20sp" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/subject_recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:scrollbars="horizontal">
 
         </androidx.recyclerview.widget.RecyclerView>
 
         <TextView
+            android:id="@+id/subject_more"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
-            android:text="View More" />
+            android:text="No Subject Added" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_weight="1"
+        android:layout_gravity="top"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_gravity="top"
             android:fontFamily="@font/raleway_reg"
             android:text="My Assignments"
             android:textSize="20sp" />
@@ -62,20 +69,21 @@
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:orientation="horizontal"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:layout_weight="1"
-            android:text="View More" />
+            android:text="No Assignment Added" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.5"
+        android:layout_gravity="bottom"
         android:orientation="horizontal">
 
         <LinearLayout
