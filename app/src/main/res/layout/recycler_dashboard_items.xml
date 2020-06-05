@@ -5,7 +5,8 @@
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
     android:background="@drawable/ic_rectangle"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".activities.MainActivity">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -15,7 +16,7 @@
         android:background="@drawable/ic_rectangle">
 
         <TextView
-            android:id="@+id/subject_name"
+            android:id="@+id/item_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
@@ -25,7 +26,7 @@
             tools:text="DBMS" />
 
         <TextView
-            android:id="@+id/subject_code"
+            android:id="@+id/item_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"

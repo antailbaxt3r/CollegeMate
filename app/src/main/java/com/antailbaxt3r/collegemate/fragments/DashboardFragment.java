@@ -15,9 +15,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.antailbaxt3r.collegemate.adapters.DashboardAssignmentRecyclerAdapter;
 import com.antailbaxt3r.collegemate.adapters.DashboardSubjectRecyclerAdapter;
 import com.antailbaxt3r.collegemate.data.GeneralData;
 import com.antailbaxt3r.collegemate.databinding.FragmentDashboardBinding;
+import com.antailbaxt3r.collegemate.models.Assignment;
+import com.antailbaxt3r.collegemate.models.AssignmentResponseModel;
 import com.antailbaxt3r.collegemate.models.Subject;
 import com.antailbaxt3r.collegemate.models.SubjectResponseModel;
 import com.antailbaxt3r.collegemate.retrofit.RetrofitClient;
@@ -32,7 +35,9 @@ public class DashboardFragment extends Fragment {
     SharedPrefs prefs;
     //Subject Recycler View Adapter
     DashboardSubjectRecyclerAdapter subjectRecyclerAdapter;
+
     //Assignment Recycler View Adapter
+    DashboardAssignmentRecyclerAdapter assignmentRecyclerAdapter;
 
 
     @Override
@@ -54,6 +59,9 @@ public class DashboardFragment extends Fragment {
 
         //Loading Subject Data
         loadSubjectData();
+
+        //Loading Assignment Data
+        loadAssignmentData();
 
         return root;
     }
@@ -82,6 +90,28 @@ public class DashboardFragment extends Fragment {
 
     }
 
+    void loadAssignmentData(){
+        Call<AssignmentResponseModel> call = RetrofitClient.getClient().getAssignments(prefs.getToken());
+        call.enqueue(new Callback<AssignmentResponseModel>() {
+            @Override
+            public void onResponse(Call<AssignmentResponseModel> call, Response<AssignmentResponseModel> response) {
+                if(response.isSuccessful()){
+                    //Saving Downloaded Data
+                    GeneralData.setAssignments(response.body().getAssignments());
+
+                    //Setting up the Recycler View
+                    setAssignmentRecyclerView(response.body().getAssignments());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<AssignmentResponseModel> call, Throwable t) {
+                Log.e("CALL Error",t.getMessage());
+            }
+        });
+
+    }
+
     void setSubjectRecyclerView(List<Subject> subjectData){
         if(subjectData.size() !=0){
             dashboardBinding.subjectMore.setText("View More");
@@ -97,5 +127,23 @@ public class DashboardFragment extends Fragment {
                 LinearLayoutManager.HORIZONTAL,false));
         subjectRecyclerAdapter = new DashboardSubjectRecyclerAdapter(croppedList,context);
         dashboardBinding.subjectRecyclerView.setAdapter(subjectRecyclerAdapter);
+    }
+
+    void setAssignmentRecyclerView(List<Assignment> assignmentData){
+        if(assignmentData.size() !=0){
+            dashboardBinding.assignmentMore.setText("View More");
+        }
+
+        //Setting maximum assignment size = 5
+        List<Assignment> croppedList = new ArrayList<>();
+        for(int i =0; i<5 && i<assignmentData.size(); i++){
+            croppedList.add(assignmentData.get(i));
+        }
+
+        dashboardBinding.assignmentRecyclerView.setLayoutManager(new LinearLayoutManager(context,
+                LinearLayoutManager.HORIZONTAL,false));
+        assignmentRecyclerAdapter = new DashboardAssignmentRecyclerAdapter(croppedList,context);
+        dashboardBinding.assignmentRecyclerView.setAdapter(assignmentRecyclerAdapter);
+
     }
 }
