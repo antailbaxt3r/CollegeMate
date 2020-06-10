@@ -1,6 +1,7 @@
 package com.antailbaxt3r.collegemate.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,10 +14,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
-import com.antailbaxt3r.collegemate.adapters.DashboardAssignmentRecyclerAdapter;
-import com.antailbaxt3r.collegemate.adapters.DashboardSubjectRecyclerAdapter;
+import com.antailbaxt3r.collegemate.activities.SubjectsActivity;
+import com.antailbaxt3r.collegemate.adapters.AssignmentRecyclerAdapter;
+import com.antailbaxt3r.collegemate.adapters.SubjectRecyclerAdapter;
 import com.antailbaxt3r.collegemate.data.GeneralData;
 import com.antailbaxt3r.collegemate.databinding.FragmentDashboardBinding;
 import com.antailbaxt3r.collegemate.models.Assignment;
@@ -34,10 +35,10 @@ public class DashboardFragment extends Fragment {
     Context context;
     SharedPrefs prefs;
     //Subject Recycler View Adapter
-    DashboardSubjectRecyclerAdapter subjectRecyclerAdapter;
+    SubjectRecyclerAdapter subjectRecyclerAdapter;
 
     //Assignment Recycler View Adapter
-    DashboardAssignmentRecyclerAdapter assignmentRecyclerAdapter;
+    AssignmentRecyclerAdapter assignmentRecyclerAdapter;
 
 
     @Override
@@ -63,7 +64,19 @@ public class DashboardFragment extends Fragment {
         //Loading Assignment Data
         loadAssignmentData();
 
+
+
         return root;
+    }
+
+    void setUpSubjectViewMore(){
+        dashboardBinding.subjectMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(), SubjectsActivity.class);
+                startActivity(i);
+            }
+        });
     }
 
     void loadSubjectData(){
@@ -115,6 +128,7 @@ public class DashboardFragment extends Fragment {
     void setSubjectRecyclerView(List<Subject> subjectData){
         if(subjectData.size() !=0){
             dashboardBinding.subjectMore.setText("View More");
+            setUpSubjectViewMore();
         }
 
         //Setting maximum subject size = 5
@@ -125,7 +139,7 @@ public class DashboardFragment extends Fragment {
 
         dashboardBinding.subjectRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),
                 LinearLayoutManager.HORIZONTAL,false));
-        subjectRecyclerAdapter = new DashboardSubjectRecyclerAdapter(croppedList,context);
+        subjectRecyclerAdapter = new SubjectRecyclerAdapter(croppedList,context);
         dashboardBinding.subjectRecyclerView.setAdapter(subjectRecyclerAdapter);
     }
 
@@ -142,7 +156,7 @@ public class DashboardFragment extends Fragment {
 
         dashboardBinding.assignmentRecyclerView.setLayoutManager(new LinearLayoutManager(context,
                 LinearLayoutManager.HORIZONTAL,false));
-        assignmentRecyclerAdapter = new DashboardAssignmentRecyclerAdapter(croppedList,context);
+        assignmentRecyclerAdapter = new AssignmentRecyclerAdapter(croppedList,context);
         dashboardBinding.assignmentRecyclerView.setAdapter(assignmentRecyclerAdapter);
 
     }

@@ -34,4 +34,5 @@ public interface APIInterface {
 
     @GET("assignments/get")
     Call<AssignmentResponseModel> getAssignments(@Header("token") String token);
+
 }
