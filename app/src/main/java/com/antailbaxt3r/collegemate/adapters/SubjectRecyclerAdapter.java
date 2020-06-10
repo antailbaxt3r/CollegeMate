@@ -1,33 +1,29 @@
 package com.antailbaxt3r.collegemate.adapters;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.antailbaxt3r.collegemate.databinding.RecyclerDashboardItemsBinding;
-import com.antailbaxt3r.collegemate.models.Assignment;
-import com.antailbaxt3r.collegemate.utils.DateFormatter;
+import com.antailbaxt3r.collegemate.models.Subject;
 
-import java.text.ParseException;
 import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class DashboardAssignmentRecyclerAdapter extends RecyclerView.Adapter<DashboardAssignmentRecyclerAdapter.ViewHolder> {
+public class SubjectRecyclerAdapter extends RecyclerView.Adapter<SubjectRecyclerAdapter.ViewHolder> {
+    RecyclerDashboardItemsBinding binding;
 
-    private RecyclerDashboardItemsBinding binding;
     private Context context;
-    private List<Assignment> data;
+    private List<Subject> data;
 
-    public DashboardAssignmentRecyclerAdapter(List<Assignment> data, Context context){
+    public SubjectRecyclerAdapter(List<Subject> data, Context context){
         this.data = data;
         this.context = context;
     }
-
 
     @NonNull
     @Override
@@ -38,13 +34,8 @@ public class DashboardAssignmentRecyclerAdapter extends RecyclerView.Adapter<Das
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.subjectName.setText(data.get(position).getCourseName());
-        try {
-            holder.dueDate.setText(new DateFormatter(data.get(position).getDateDue()).getDateFormat1());
-        } catch (ParseException e) {
-            e.printStackTrace();
-            Log.e("PARSE ERROR",e.getMessage());
-        }
+        holder.subjectCode.setText(data.get(position).getCourseCode());
+        holder.subjectName.setText(data.get(position).getSubjectTitle());
     }
 
     @Override
@@ -54,12 +45,12 @@ public class DashboardAssignmentRecyclerAdapter extends RecyclerView.Adapter<Das
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         public TextView subjectName;
-        public TextView dueDate;
+        public TextView subjectCode;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             subjectName = binding.itemTitle;
-            dueDate = binding.itemInfo;
+            subjectCode = binding.itemInfo;
         }
     }
 }
