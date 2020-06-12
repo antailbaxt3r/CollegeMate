@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class SubjectResponseModel {
+public class SubjectGetResponseModel {
     @SerializedName("success")
     @Expose
     private boolean success;

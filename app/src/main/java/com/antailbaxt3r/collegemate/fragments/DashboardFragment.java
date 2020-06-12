@@ -23,7 +23,7 @@ import com.antailbaxt3r.collegemate.databinding.FragmentDashboardBinding;
 import com.antailbaxt3r.collegemate.models.Assignment;
 import com.antailbaxt3r.collegemate.models.AssignmentResponseModel;
 import com.antailbaxt3r.collegemate.models.Subject;
-import com.antailbaxt3r.collegemate.models.SubjectResponseModel;
+import com.antailbaxt3r.collegemate.models.SubjectGetResponseModel;
 import com.antailbaxt3r.collegemate.retrofit.RetrofitClient;
 import com.antailbaxt3r.collegemate.utils.SharedPrefs;
 
@@ -80,10 +80,10 @@ public class DashboardFragment extends Fragment {
     }
 
     void loadSubjectData(){
-        Call<SubjectResponseModel> call = RetrofitClient.getClient().getSubject(prefs.getToken());
-        call.enqueue(new Callback<SubjectResponseModel>() {
+        Call<SubjectGetResponseModel> call = RetrofitClient.getClient().getSubject(prefs.getToken());
+        call.enqueue(new Callback<SubjectGetResponseModel>() {
             @Override
-            public void onResponse(Call<SubjectResponseModel> call, Response<SubjectResponseModel> response) {
+            public void onResponse(Call<SubjectGetResponseModel> call, Response<SubjectGetResponseModel> response) {
                 if(response.isSuccessful()){
                     //Saving downloaded Data
                     GeneralData.setSubjects(response.body().getSubjects());
@@ -95,7 +95,7 @@ public class DashboardFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<SubjectResponseModel> call, Throwable t) {
+            public void onFailure(Call<SubjectGetResponseModel> call, Throwable t) {
                 Log.e("CALL Error",t.getMessage());
             }
         });
