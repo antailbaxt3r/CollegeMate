@@ -15,6 +15,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.antailbaxt3r.collegemate.activities.AddAssignmentActivity;
+import com.antailbaxt3r.collegemate.activities.AssignmentActivity;
 import com.antailbaxt3r.collegemate.activities.SubjectsActivity;
 import com.antailbaxt3r.collegemate.adapters.AssignmentRecyclerAdapter;
 import com.antailbaxt3r.collegemate.adapters.SubjectRecyclerAdapter;
@@ -74,6 +76,16 @@ public class DashboardFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getActivity(), SubjectsActivity.class);
+                startActivity(i);
+            }
+        });
+    }
+
+    void setUpAssignmentViewMore(){
+        dashboardBinding.assignmentMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(), AssignmentActivity.class);
                 startActivity(i);
             }
         });
@@ -146,6 +158,7 @@ public class DashboardFragment extends Fragment {
     void setAssignmentRecyclerView(List<Assignment> assignmentData){
         if(assignmentData.size() !=0){
             dashboardBinding.assignmentMore.setText("View More");
+            setUpAssignmentViewMore();
         }
 
         //Setting maximum assignment size = 5

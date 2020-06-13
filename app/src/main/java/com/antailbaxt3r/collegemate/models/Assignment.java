@@ -7,6 +7,15 @@ public class Assignment {
     @SerializedName("assignment_id")
     @Expose
     private String assignmentId;
+    @SerializedName("assignment_title")
+    @Expose
+    private String assignmentTitle;
+    @SerializedName("assignment_description")
+    @Expose
+    private String assignmentDescription;
+    @SerializedName("image_path")
+    @Expose
+    private String imagePath;
     @SerializedName("login_id")
     @Expose
     private Integer loginId;
@@ -38,6 +47,27 @@ public class Assignment {
     }
     public void setLoginId(Integer loginId){
         this.loginId = loginId;
+    }
+
+    public String getAssignmentTitle() {
+        return assignmentTitle;
+    }
+    public void setAssignmentTitle(String assignmentTitle) {
+        this.assignmentTitle = assignmentTitle;
+    }
+
+    public String getAssignmentDescription() {
+        return assignmentDescription;
+    }
+    public void setAssignmentDescription(String assignmentDescription) {
+        this.assignmentDescription = assignmentDescription;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 
     public String getCourseName(){
