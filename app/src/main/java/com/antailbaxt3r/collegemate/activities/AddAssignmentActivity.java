@@ -25,7 +25,6 @@ import android.widget.Toast;
 import com.antailbaxt3r.collegemate.data.GeneralData;
 import com.antailbaxt3r.collegemate.databinding.ActivityAddAssignmentBinding;
 import com.antailbaxt3r.collegemate.models.AssignmentPostResponseModel;
-import com.antailbaxt3r.collegemate.models.AssignmentResponseModel;
 import com.antailbaxt3r.collegemate.models.ImageUploadResponseModel;
 import com.antailbaxt3r.collegemate.models.Subject;
 import com.antailbaxt3r.collegemate.retrofit.LocalRetrofitClient;
@@ -36,7 +35,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,7 +49,6 @@ public class AddAssignmentActivity extends AppCompatActivity {
 
     String subject,dueDate;
     private byte[] imageByte;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,12 +93,16 @@ public class AddAssignmentActivity extends AppCompatActivity {
 
     boolean isFilled(){
         if(binding.title.getText().toString().length() ==0){
+            Toast.makeText(this, "Enter a Title", Toast.LENGTH_SHORT).show();
             return false;
         }else if(binding.description.getText().toString().length() ==0){
+            Toast.makeText(this, "Enter a Description", Toast.LENGTH_SHORT).show();
             return false;
         }else if(subject == null){
+            Toast.makeText(this, "Select a Subject", Toast.LENGTH_SHORT).show();
             return false;
         }else if(dueDate ==null){
+            Toast.makeText(this, "Enter Due Date", Toast.LENGTH_SHORT).show();
             return false;
         }
 
@@ -150,7 +151,6 @@ public class AddAssignmentActivity extends AppCompatActivity {
                 Log.e("Upload Unsuccessful",t.getMessage());
             }
         });
-
 
     }
 

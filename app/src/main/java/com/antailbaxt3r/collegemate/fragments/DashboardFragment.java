@@ -42,7 +42,6 @@ public class DashboardFragment extends Fragment {
     //Assignment Recycler View Adapter
     AssignmentRecyclerAdapter assignmentRecyclerAdapter;
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -162,7 +161,6 @@ public class DashboardFragment extends Fragment {
         if(assignmentData.size() !=0){
             dashboardBinding.assignmentMore.setText("View More");
         }
-
 
         //Setting maximum assignment size = 5
         List<Assignment> croppedList = new ArrayList<>();

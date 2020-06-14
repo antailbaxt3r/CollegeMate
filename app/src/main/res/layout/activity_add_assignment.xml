@@ -147,8 +147,6 @@
 
     </LinearLayout>
 
-
-
     <LinearLayout
         android:layout_margin="20dp"
         android:id="@+id/submit"
@@ -158,6 +156,7 @@
         android:background="@drawable/ic_rectangle">
 
         <TextView
+            android:layout_margin="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
@@ -165,7 +164,7 @@
             android:fontFamily="@font/raleway_reg"
             android:text="submit"
             android:textColor="#FFFFFF"
-            android:textSize="18sp" />
+            android:textSize="24sp" />
     </LinearLayout>
 
 
