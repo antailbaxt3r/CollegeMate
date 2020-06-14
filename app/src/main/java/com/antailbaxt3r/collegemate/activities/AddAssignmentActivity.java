@@ -9,6 +9,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -17,6 +18,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
@@ -33,6 +35,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,8 +49,9 @@ public class AddAssignmentActivity extends AppCompatActivity {
 
     SharedPrefs pref;
 
-    String subject,imagePath;
-    Boolean imageLoading = false;
+    String subject,dueDate;
+    private byte[] imageByte;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +66,6 @@ public class AddAssignmentActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //Setting image loading status as true
-                imageLoading = true;
                 Intent i = new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(i,RESULT_LOAD_IMAGE);
             }
@@ -80,6 +84,13 @@ public class AddAssignmentActivity extends AppCompatActivity {
                 submitData();
             }
         });
+
+        binding.dateDue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDatePickerDialog();
+            }
+        });
     }
 
 
@@ -90,11 +101,24 @@ public class AddAssignmentActivity extends AppCompatActivity {
             return false;
         }else if(subject == null){
             return false;
-        }else if(imageLoading){
+        }else if(dueDate ==null){
             return false;
         }
 
         return true;
+    }
+
+    void showDatePickerDialog(){
+        Calendar calendar = Calendar.getInstance();
+        DatePickerDialog dialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+                dueDate = i+"-"+i1+"-"+i2;
+                binding.dateDue.setText(dueDate);
+            }
+        },calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH));
+        dialog.getDatePicker().setMinDate(calendar.getTimeInMillis());
+        dialog.show();
     }
 
     void submitData(){
@@ -105,9 +129,7 @@ public class AddAssignmentActivity extends AppCompatActivity {
         data.put("assignment_title",binding.title.getText().toString());
         data.put("assignment_description",binding.description.getText().toString());
         data.put("course_name",subject);
-        if(imagePath!=null){
-            data.put("image_path",imagePath);
-        }
+        data.put("date_due",dueDate);
 
         Call<AssignmentPostResponseModel> call = LocalRetrofitClient.getClient().addAssignment(pref.getToken(),data);
         call.enqueue(new Callback<AssignmentPostResponseModel>() {
@@ -116,9 +138,13 @@ public class AddAssignmentActivity extends AppCompatActivity {
                 if(response.isSuccessful()){
                     Log.i("Upload Successful",response.body().toString());
 
+                    //Upload image
+                    if(imageByte !=null){
+                        uploadImage(imageByte,response.body().getAssignment().getAssignmentId());
+                    }
+
                 }
             }
-
             @Override
             public void onFailure(Call<AssignmentPostResponseModel> call, Throwable t) {
                 Log.e("Upload Unsuccessful",t.getMessage());
@@ -152,9 +178,9 @@ public class AddAssignmentActivity extends AppCompatActivity {
         menu.show();
     }
 
-    void onImageUploadSuccessful(Uri imageUri){
-        imageLoading = false;
+    void onImageSelected(Uri imageUri){
         try {
+            //Setting Image
             Bitmap bitmap =MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
             binding.image.setImageBitmap(bitmap);
 
@@ -168,20 +194,16 @@ public class AddAssignmentActivity extends AppCompatActivity {
         }
     }
 
-    void uploadImage(byte[] imageBytes, final Uri uri){
+    void uploadImage(byte[] imageBytes, Integer assignmentId){
         RequestBody requestBody = RequestBody.create(MediaType.parse("image/jpeg"),imageBytes);
         MultipartBody.Part body = MultipartBody.Part.createFormData("image", "image.jpg", requestBody);
-        Call<ImageUploadResponseModel> call = LocalRetrofitClient.getClient().uploadImage(pref.getToken(),body);
+        Call<ImageUploadResponseModel> call = LocalRetrofitClient.getClient().uploadImage(pref.getToken(),body,assignmentId);
         call.enqueue(new Callback<ImageUploadResponseModel>() {
             @Override
             public void onResponse(Call<ImageUploadResponseModel> call, Response<ImageUploadResponseModel> response) {
                 if(response.isSuccessful()){
-                    Toast.makeText(AddAssignmentActivity.this, response.body().getPath(), Toast.LENGTH_SHORT).show();
-                    Log.i("Upload Successful",response.body().getPath());
-
-                    //Setting Image Path
-                    imagePath = response.body().getPath();
-                    onImageUploadSuccessful(uri);
+                    Log.i("Upload Successful",response.body().getMessage());
+                    finish();
                 }
             }
 
@@ -195,9 +217,13 @@ public class AddAssignmentActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if(requestCode == RESULT_LOAD_IMAGE){
+            if(data == null){
+                return;
+            }
             try {
                 InputStream is = getContentResolver().openInputStream(data.getData());
-                uploadImage(getBytes(is),data.getData());
+                imageByte = getBytes(is);
+                onImageSelected(data.getData());
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             } catch (IOException e) {

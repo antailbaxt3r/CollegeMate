@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 public class Assignment {
     @SerializedName("assignment_id")
     @Expose
-    private String assignmentId;
+    private Integer assignmentId;
     @SerializedName("assignment_title")
     @Expose
     private String assignmentTitle;
@@ -35,10 +35,10 @@ public class Assignment {
     @Expose
     private String deletedAt;
 
-    public String getAssignmentId(){
+    public Integer getAssignmentId(){
         return this.assignmentId;
     }
-    public void setAssignmentId(String assignmentId){
+    public void setAssignmentId(Integer assignmentId){
         this.assignmentId = assignmentId;
     }
 

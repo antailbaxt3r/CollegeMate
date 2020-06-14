@@ -8,6 +8,7 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+//Mainly used for testing few features with local server.
 public class LocalRetrofitClient {
 
     private static APIInterface apiInterface;

@@ -43,12 +43,12 @@ public interface APIInterface {
 
     @GET("assignments/get")
     Call<AssignmentResponseModel> getAssignments(@Header("token") String token);
-    @POST
+    @POST("assignments/add")
     Call<AssignmentPostResponseModel> addAssignment(@Header("token") String token,@Body Map<String,String> map);
 
     @Multipart
     @POST("assignments/upload")
-    Call<ImageUploadResponseModel> uploadImage(@Header("token") String token, @Part MultipartBody.Part body);
+    Call<ImageUploadResponseModel> uploadImage(@Header("token") String token, @Part MultipartBody.Part body, @Part("assignment_id") Integer id);
 
 
 

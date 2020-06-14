@@ -6,16 +6,16 @@ import com.google.gson.annotations.SerializedName;
 public class ImageUploadResponseModel {
     @SerializedName("success")
     @Expose
-    private Boolean success;
+    private boolean success;
 
-    @SerializedName("image_path")
+    @SerializedName("msg")
     @Expose
-    private String path;
+    private String message;
 
-    public String getPath() {
-        return path;
+    public boolean getSuccess(){
+        return this.success;
     }
-    public void setPath(String path) {
-        this.path = path;
+    public String getMessage() {
+        return this.message;
     }
 }

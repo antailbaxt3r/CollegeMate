@@ -66,6 +66,9 @@ public class DashboardFragment extends Fragment {
         //Loading Assignment Data
         loadAssignmentData();
 
+        setUpSubjectViewMore();
+        setUpAssignmentViewMore();
+
 
 
         return root;
@@ -140,8 +143,8 @@ public class DashboardFragment extends Fragment {
     void setSubjectRecyclerView(List<Subject> subjectData){
         if(subjectData.size() !=0){
             dashboardBinding.subjectMore.setText("View More");
-            setUpSubjectViewMore();
         }
+
 
         //Setting maximum subject size = 5
         List<Subject> croppedList  = new ArrayList<>();
@@ -158,8 +161,8 @@ public class DashboardFragment extends Fragment {
     void setAssignmentRecyclerView(List<Assignment> assignmentData){
         if(assignmentData.size() !=0){
             dashboardBinding.assignmentMore.setText("View More");
-            setUpAssignmentViewMore();
         }
+
 
         //Setting maximum assignment size = 5
         List<Assignment> croppedList = new ArrayList<>();
@@ -172,5 +175,12 @@ public class DashboardFragment extends Fragment {
         assignmentRecyclerAdapter = new AssignmentRecyclerAdapter(croppedList,context);
         dashboardBinding.assignmentRecyclerView.setAdapter(assignmentRecyclerAdapter);
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setAssignmentRecyclerView(GeneralData.getAssignments());
+        setSubjectRecyclerView(GeneralData.getSubjects());
     }
 }

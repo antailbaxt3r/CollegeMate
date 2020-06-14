@@ -94,10 +94,32 @@
                     android:layout_margin="10dp"
                     android:src="@drawable/ic_downarrow" />
             </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="20dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="3dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.rengwuxian.materialedittext.MaterialAutoCompleteTextView
+                    android:id="@+id/date_due"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:focusable="false"
+                    android:layout_weight="1"
+                    android:hint="Due Date" />
+            </LinearLayout>
+
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/add_image"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -105,10 +127,12 @@
             app:cardCornerRadius="10dp"
             app:cardElevation="3dp">
             <com.rengwuxian.materialedittext.MaterialAutoCompleteTextView
+                android:id="@+id/add_image"
                 android:layout_marginHorizontal="10dp"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Image (Optional)"/>
+                android:focusable="false"
+                android:hint="Image (Optional)"/>
         </androidx.cardview.widget.CardView>
 
         <ImageView

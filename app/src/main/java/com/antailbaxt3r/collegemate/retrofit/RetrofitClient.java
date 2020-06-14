@@ -1,13 +1,8 @@
 package com.antailbaxt3r.collegemate.retrofit;
 
-import androidx.annotation.NonNull;
-
-import java.io.IOException;
 import java.util.concurrent.TimeUnit;
-import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -17,7 +12,7 @@ public class RetrofitClient {
 
     public static APIInterface getClient() {
         if (apiInterface == null) {
-            String BASE_URL = "https://collegemate-api.herokuapp.com/api/";
+            String BASE_URL = "http://192.168.0.104:4193/api/";
             Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .client(getHttpClient())
@@ -32,7 +27,7 @@ public class RetrofitClient {
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
         httpClient.connectTimeout(30, TimeUnit.SECONDS);
-        httpClient.readTimeout(30, TimeUnit.SECONDS);
+        httpClient.readTimeout(120, TimeUnit.SECONDS);
         httpClient.writeTimeout(30, TimeUnit.SECONDS);
         httpClient.addInterceptor(logging);
         httpClient.addInterceptor(chain -> {
