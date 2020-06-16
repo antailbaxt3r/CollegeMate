@@ -11,16 +11,22 @@
         <item name="colorAccent">@color/colorAccent</item>
         <!-- Theme Overrides -->
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
+        <item name="toolbarStyle">@style/AppToolbarStyle</item>
     </style>
 
+    <!-- Bottom Style Sheet -->
     <style name="AppBottomSheetDialogTheme"
         parent="Theme.Design.Light.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/AppModalStyle</item>
     </style>
-
     <style name="AppModalStyle"
         parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@drawable/ic_rectangle_19</item>
+    </style>
+
+    <!-- Toolbar Style -->
+    <style name="AppToolbarStyle" parent="Widget.AppCompat.Toolbar">
+        <item name="android:background">@color/light_blue</item>
     </style>
 
 

@@ -98,7 +98,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private void handleSignInResult(GoogleSignInResult result) {
         if(result.isSuccess()){
             GoogleSignInAccount account = result.getSignInAccount();
-            Log.i("id", account.getIdToken());
+            Log.i("Google OAuth JWT", account.getIdToken());
             // you can store user data to SharedPreference
             Call<TokenResponseModel> call = RetrofitClient.getClient().getToken(account.getIdToken());
             call.enqueue(new Callback<TokenResponseModel>() {

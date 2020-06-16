@@ -15,6 +15,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.antailbaxt3r.collegemate.activities.AddAssignmentActivity;
+import com.antailbaxt3r.collegemate.activities.AssignmentActivity;
 import com.antailbaxt3r.collegemate.activities.SubjectsActivity;
 import com.antailbaxt3r.collegemate.adapters.AssignmentRecyclerAdapter;
 import com.antailbaxt3r.collegemate.adapters.SubjectRecyclerAdapter;
@@ -40,7 +42,6 @@ public class DashboardFragment extends Fragment {
     //Assignment Recycler View Adapter
     AssignmentRecyclerAdapter assignmentRecyclerAdapter;
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +65,9 @@ public class DashboardFragment extends Fragment {
         //Loading Assignment Data
         loadAssignmentData();
 
+        setUpSubjectViewMore();
+        setUpAssignmentViewMore();
+
 
 
         return root;
@@ -74,6 +78,16 @@ public class DashboardFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getActivity(), SubjectsActivity.class);
+                startActivity(i);
+            }
+        });
+    }
+
+    void setUpAssignmentViewMore(){
+        dashboardBinding.assignmentMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(), AssignmentActivity.class);
                 startActivity(i);
             }
         });
@@ -128,8 +142,8 @@ public class DashboardFragment extends Fragment {
     void setSubjectRecyclerView(List<Subject> subjectData){
         if(subjectData.size() !=0){
             dashboardBinding.subjectMore.setText("View More");
-            setUpSubjectViewMore();
         }
+
 
         //Setting maximum subject size = 5
         List<Subject> croppedList  = new ArrayList<>();
@@ -159,5 +173,12 @@ public class DashboardFragment extends Fragment {
         assignmentRecyclerAdapter = new AssignmentRecyclerAdapter(croppedList,context);
         dashboardBinding.assignmentRecyclerView.setAdapter(assignmentRecyclerAdapter);
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setAssignmentRecyclerView(GeneralData.getAssignments());
+        setSubjectRecyclerView(GeneralData.getSubjects());
     }
 }

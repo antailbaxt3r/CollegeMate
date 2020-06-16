@@ -33,10 +33,11 @@
             android:layout_gravity="right"
             android:layout_margin="10dp"
             android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
             android:fontFamily="@font/raleway_bold"
             android:text="Subjects"
             android:textSize="50sp"
-            app:layout_constraintEnd_toEndOf="@+id/recycler_view"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView

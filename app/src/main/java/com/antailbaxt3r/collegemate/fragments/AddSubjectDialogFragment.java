@@ -87,7 +87,7 @@ public class AddSubjectDialogFragment extends BottomSheetDialogFragment{
             }
             @Override
             public void onFailure(Call<SubjectPostResponseModel> call, Throwable t) {
-
+                Log.e("Upload Failed",t.getMessage());
             }
         });
     }
