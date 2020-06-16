@@ -1,50 +1,45 @@
 package com.antailbaxt3r.collegemate.adapters;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.antailbaxt3r.collegemate.databinding.RecyclerDashboardItemsBinding;
+import com.antailbaxt3r.collegemate.databinding.RecyclerAssignmentBinding;
 import com.antailbaxt3r.collegemate.models.Assignment;
-import com.antailbaxt3r.collegemate.utils.DateFormatter;
+import com.antailbaxt3r.collegemate.tasks.AsyncTaskLoadAssignmentImage;
 
-import java.text.ParseException;
 import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class AssignmentRecyclerAdapter extends RecyclerView.Adapter<AssignmentRecyclerAdapter.ViewHolder> {
-
-    private RecyclerDashboardItemsBinding binding;
-    private Context context;
+    private RecyclerAssignmentBinding binding;
     private List<Assignment> data;
+    private Context context;
 
-    public AssignmentRecyclerAdapter(List<Assignment> data, Context context){
+    public AssignmentRecyclerAdapter(List<Assignment> data, Context context) {
         this.data = data;
         this.context = context;
     }
 
-
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        binding = RecyclerDashboardItemsBinding.inflate(LayoutInflater.from(context),parent,false);
+        binding = RecyclerAssignmentBinding.inflate(LayoutInflater.from(context),parent,false);
         return new ViewHolder(binding.getRoot());
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.subjectName.setText(data.get(position).getCourseName());
-        try {
-            holder.dueDate.setText(new DateFormatter(data.get(position).getDateDue()).getDateFormat1());
-        } catch (ParseException e) {
-            e.printStackTrace();
-            Log.e("PARSE ERROR",e.getMessage());
-        }
+        //Setting Text
+        setText(holder,position);
+        //Setting Image
+        fetchImage(holder,position);
     }
 
     @Override
@@ -53,13 +48,37 @@ public class AssignmentRecyclerAdapter extends RecyclerView.Adapter<AssignmentRe
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        public TextView subjectName;
-        public TextView dueDate;
+        LinearLayout imageLayout;
+        ImageView imageView;
+        TextView title,description,subjectId,subjectName;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            subjectName = binding.itemTitle;
-            dueDate = binding.itemInfo;
+            imageLayout = binding.imageLayout;
+            imageView = binding.image;
+            title = binding.title;
+            description = binding.description;
+            subjectId = binding.subjectId;
+            subjectName = binding.subjectName;
         }
+    }
+
+    void setText(ViewHolder holder,int position){
+        holder.title.setText(data.get(position).getAssignmentTitle());
+        holder.subjectName.setText(data.get(position).getCourseName());
+        holder.subjectId.setText(data.get(position).getCourseCode());
+
+        holder.description.setText(data.get(position).getAssignmentDescription());
+
+    }
+
+    void fetchImage(ViewHolder holder,int position){
+        if(data.get(position).getImagePath() == null){
+            holder.imageLayout.setVisibility(View.GONE);
+        }
+        AsyncTaskLoadAssignmentImage task = new AsyncTaskLoadAssignmentImage(holder.imageView,context,data.get(position).getImagePath());
+
+        task.execute();
+
     }
 }

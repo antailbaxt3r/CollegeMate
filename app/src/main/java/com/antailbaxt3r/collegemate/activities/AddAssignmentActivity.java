@@ -1,5 +1,6 @@
 package com.antailbaxt3r.collegemate.activities;
 
+import androidx.annotation.LongDef;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import okhttp3.MediaType;
@@ -24,6 +25,7 @@ import android.widget.Toast;
 
 import com.antailbaxt3r.collegemate.data.GeneralData;
 import com.antailbaxt3r.collegemate.databinding.ActivityAddAssignmentBinding;
+import com.antailbaxt3r.collegemate.models.Assignment;
 import com.antailbaxt3r.collegemate.models.AssignmentPostResponseModel;
 import com.antailbaxt3r.collegemate.models.ImageUploadResponseModel;
 import com.antailbaxt3r.collegemate.models.Subject;
@@ -47,7 +49,9 @@ public class AddAssignmentActivity extends AppCompatActivity {
 
     SharedPrefs pref;
 
-    String subject,dueDate;
+    Assignment assignmentData;
+
+    String subject,subjectCode,dueDate;
     private byte[] imageByte;
 
     @Override
@@ -101,6 +105,8 @@ public class AddAssignmentActivity extends AppCompatActivity {
         }else if(subject == null){
             Toast.makeText(this, "Select a Subject", Toast.LENGTH_SHORT).show();
             return false;
+        }else if(subjectCode ==null){
+            return false;
         }else if(dueDate ==null){
             Toast.makeText(this, "Enter Due Date", Toast.LENGTH_SHORT).show();
             return false;
@@ -131,6 +137,7 @@ public class AddAssignmentActivity extends AppCompatActivity {
         data.put("assignment_description",binding.description.getText().toString());
         data.put("course_name",subject);
         data.put("date_due",dueDate);
+        data.put("course_code",subjectCode);
 
         Call<AssignmentPostResponseModel> call = LocalRetrofitClient.getClient().addAssignment(pref.getToken(),data);
         call.enqueue(new Callback<AssignmentPostResponseModel>() {
@@ -139,11 +146,14 @@ public class AddAssignmentActivity extends AppCompatActivity {
                 if(response.isSuccessful()){
                     Log.i("Upload Successful",response.body().toString());
 
+                    assignmentData = response.body().getAssignment();
                     //Upload image
                     if(imageByte !=null){
                         uploadImage(imageByte,response.body().getAssignment().getAssignmentId());
+                    }else{
+                        GeneralData.assignments.add(assignmentData);
+                        finish();
                     }
-
                 }
             }
             @Override
@@ -170,6 +180,7 @@ public class AddAssignmentActivity extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
                 subject = GeneralData.getSubjects().get(menuItem.getItemId()).getSubjectTitle();
+                subjectCode = GeneralData.getSubjects().get(menuItem.getItemId()).getCourseCode();
                 binding.subject.setText(subject);
                 return false;
             }
@@ -202,6 +213,9 @@ public class AddAssignmentActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ImageUploadResponseModel> call, Response<ImageUploadResponseModel> response) {
                 if(response.isSuccessful()){
+                    //Adding path to local assignment data
+                    assignmentData.setImagePath(response.body().getImagePath());
+                    GeneralData.assignments.add(assignmentData);
                     Log.i("Upload Successful",response.body().getMessage());
                     finish();
                 }

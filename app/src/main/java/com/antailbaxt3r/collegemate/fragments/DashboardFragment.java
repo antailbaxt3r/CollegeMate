@@ -15,10 +15,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.antailbaxt3r.collegemate.activities.AddAssignmentActivity;
 import com.antailbaxt3r.collegemate.activities.AssignmentActivity;
 import com.antailbaxt3r.collegemate.activities.SubjectsActivity;
-import com.antailbaxt3r.collegemate.adapters.AssignmentRecyclerAdapter;
+import com.antailbaxt3r.collegemate.adapters.AssignmentDashboardRecyclerAdapter;
 import com.antailbaxt3r.collegemate.adapters.SubjectRecyclerAdapter;
 import com.antailbaxt3r.collegemate.data.GeneralData;
 import com.antailbaxt3r.collegemate.databinding.FragmentDashboardBinding;
@@ -40,7 +39,7 @@ public class DashboardFragment extends Fragment {
     SubjectRecyclerAdapter subjectRecyclerAdapter;
 
     //Assignment Recycler View Adapter
-    AssignmentRecyclerAdapter assignmentRecyclerAdapter;
+    AssignmentDashboardRecyclerAdapter assignmentRecyclerAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -170,7 +169,7 @@ public class DashboardFragment extends Fragment {
 
         dashboardBinding.assignmentRecyclerView.setLayoutManager(new LinearLayoutManager(context,
                 LinearLayoutManager.HORIZONTAL,false));
-        assignmentRecyclerAdapter = new AssignmentRecyclerAdapter(croppedList,context);
+        assignmentRecyclerAdapter = new AssignmentDashboardRecyclerAdapter(croppedList,context);
         dashboardBinding.assignmentRecyclerView.setAdapter(assignmentRecyclerAdapter);
 
     }

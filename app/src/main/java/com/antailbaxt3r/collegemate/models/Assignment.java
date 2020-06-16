@@ -22,6 +22,9 @@ public class Assignment {
     @SerializedName("course_name")
     @Expose
     private String courseName;
+    @SerializedName("course_code")
+    @Expose
+    private String courseCode;
     @SerializedName("date_due")
     @Expose
     private String dateDue;
@@ -40,6 +43,13 @@ public class Assignment {
     }
     public void setAssignmentId(Integer assignmentId){
         this.assignmentId = assignmentId;
+    }
+
+    public String getCourseCode() {
+        return courseCode;
+    }
+    public void setCourseCode(String courseCode) {
+        this.courseCode = courseCode;
     }
 
     public Integer getLoginId(){
