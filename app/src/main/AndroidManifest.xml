@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activities.AssignmentActivity"></activity>
+        <activity android:name=".activities.AddClassActivity"></activity>
+        <activity android:name=".activities.AssignmentActivity" />
         <activity android:name=".activities.AddAssignmentActivity" />
         <activity android:name=".activities.SubjectsActivity" />
         <activity android:name=".activities.RegisterActivity" />
