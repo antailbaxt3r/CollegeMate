@@ -12,10 +12,19 @@ public class ImageUploadResponseModel {
     @Expose
     private String message;
 
+    @SerializedName("image_path")
+    @Expose
+    private String imagePath;
+
+
+
     public boolean getSuccess(){
         return this.success;
     }
     public String getMessage() {
         return this.message;
+    }
+    public String getImagePath(){
+        return this.imagePath;
     }
 }

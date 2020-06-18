@@ -42,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
+        Log.i("ID TOKEN",prefs.getToken());
+
         setSupportActionBar(binding.toolbar);
         initDrawer();
 
