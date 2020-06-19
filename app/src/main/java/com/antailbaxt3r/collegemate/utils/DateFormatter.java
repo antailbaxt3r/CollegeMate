@@ -14,4 +14,8 @@ public class DateFormatter {
         SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, hh aa");
         return dateFormat.format(this.date);
     }
+    public String getTimeFormat(){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("hh-mm");
+        return dateFormat.format(this.date);
+    }
 }

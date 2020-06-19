@@ -14,4 +14,16 @@
     <string name="my_profile">My Profile</string>
     <string name="open_drawer">Open</string>
     <string name="close_drawer">Close</string>
+
+    <!-- Arrays -->
+
+    <string-array name="days">
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+        <item>Sunday</item>
+    </string-array>
 </resources>
