@@ -12,7 +12,7 @@ public class RetrofitClient {
 
     public static APIInterface getClient() {
         if (apiInterface == null) {
-            String BASE_URL = "http://collegemate-api.herokuapp.com/api/";
+            String BASE_URL = "https://collegemate-api.herokuapp.com/api/";
             Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .client(getHttpClient())

@@ -2,6 +2,7 @@ package com.antailbaxt3r.collegemate.retrofit;
 
 import com.antailbaxt3r.collegemate.models.AssignmentPostResponseModel;
 import com.antailbaxt3r.collegemate.models.AssignmentResponseModel;
+import com.antailbaxt3r.collegemate.models.ClassesResponseModel;
 import com.antailbaxt3r.collegemate.models.ImageUploadResponseModel;
 import com.antailbaxt3r.collegemate.models.SubjectGetResponseModel;
 import com.antailbaxt3r.collegemate.models.SubjectPostResponseModel;
@@ -45,6 +46,9 @@ public interface APIInterface {
     Call<AssignmentResponseModel> getAssignments(@Header("token") String token);
     @POST("assignments/add")
     Call<AssignmentPostResponseModel> addAssignment(@Header("token") String token,@Body Map<String,String> map);
+
+    @POST("timetable/add")
+    Call<ClassesResponseModel> addClasses(@Header("token") String token, @Body Map<String,String> map);
 
     @Multipart
     @POST("assignments/upload")
