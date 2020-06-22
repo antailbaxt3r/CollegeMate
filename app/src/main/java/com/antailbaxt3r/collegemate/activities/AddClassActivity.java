@@ -7,7 +7,7 @@ import retrofit2.Response;
 
 import android.app.TimePickerDialog;
 import android.os.Bundle;
-import android.provider.Settings;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.PopupMenu;
@@ -17,15 +17,13 @@ import android.widget.Toast;
 import com.antailbaxt3r.collegemate.R;
 import com.antailbaxt3r.collegemate.data.GeneralData;
 import com.antailbaxt3r.collegemate.databinding.ActivityAddClassBinding;
-import com.antailbaxt3r.collegemate.models.ClassesResponseModel;
+import com.antailbaxt3r.collegemate.models.Classes;
+import com.antailbaxt3r.collegemate.models.ClassesPostResponseModel;
 import com.antailbaxt3r.collegemate.models.Subject;
 import com.antailbaxt3r.collegemate.retrofit.RetrofitClient;
-import com.antailbaxt3r.collegemate.utils.DateFormatter;
 import com.antailbaxt3r.collegemate.utils.SharedPrefs;
 import com.antailbaxt3r.collegemate.utils.TimeFormatter;
 
-import java.sql.Time;
-import java.text.ParseException;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -101,11 +99,13 @@ public class AddClassActivity extends AppCompatActivity {
             data.put("faculty",faculty);
         }
 
-        Call<ClassesResponseModel> call = RetrofitClient.getClient().addClasses(prefs.getToken(),data);
-        call.enqueue(new Callback<ClassesResponseModel>() {
+        Call<ClassesPostResponseModel> call = RetrofitClient.getClient().addClasses(prefs.getToken(),data);
+        call.enqueue(new Callback<ClassesPostResponseModel>() {
             @Override
-            public void onResponse(Call<ClassesResponseModel> call, Response<ClassesResponseModel> response) {
+            public void onResponse(Call<ClassesPostResponseModel> call, Response<ClassesPostResponseModel> response) {
                 if(response.isSuccessful()){
+                    Classes classes = response.body().getClasses();
+                    Log.i("Added",classes.toString());
                     GeneralData.classes.add(response.body().getClasses());
                     Toast.makeText(AddClassActivity.this, "Class Added Successfully", Toast.LENGTH_SHORT).show();
                     finish();
@@ -113,7 +113,7 @@ public class AddClassActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<ClassesResponseModel> call, Throwable t) {
+            public void onFailure(Call<ClassesPostResponseModel> call, Throwable t) {
                 Toast.makeText(AddClassActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
