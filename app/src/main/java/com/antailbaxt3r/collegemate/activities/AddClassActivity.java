@@ -36,7 +36,7 @@ public class AddClassActivity extends AppCompatActivity {
     ActivityAddClassBinding binding;
     SharedPrefs prefs;
 
-    String courseCode, courseName,start,end,faculty,day;
+    String courseCode, courseName,start,end,faculty,day,venue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,6 +96,7 @@ public class AddClassActivity extends AppCompatActivity {
         data.put("start",start);
         data.put("end",end);
         data.put("day",day);
+        data.put("venue",venue);
         if(faculty!=null){
             data.put("faculty",faculty);
         }
@@ -120,6 +121,7 @@ public class AddClassActivity extends AppCompatActivity {
 
     void readEditText(){
         faculty = binding.faculty.getText().toString();
+        venue = binding.venue.getText().toString();
     }
 
     boolean isFilled(){
@@ -129,6 +131,8 @@ public class AddClassActivity extends AppCompatActivity {
         }else if(start ==null){
             Toast.makeText(this, "Please select start time", Toast.LENGTH_SHORT).show();
             return false;
+        }else if(venue ==null){
+            Toast.makeText(this, "Please enter a venue", Toast.LENGTH_SHORT).show();
         }else if(end ==null){
             Toast.makeText(this, "Please select end time", Toast.LENGTH_SHORT).show();
             return false;

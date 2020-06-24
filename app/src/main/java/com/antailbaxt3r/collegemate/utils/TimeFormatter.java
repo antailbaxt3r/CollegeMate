@@ -8,6 +8,7 @@ public class TimeFormatter {
 
     private Date date;
     public TimeFormatter(String time) throws ParseException {
+        //In 24 hour format
         this.date = new SimpleDateFormat("hh-mm").parse(time);
     }
 

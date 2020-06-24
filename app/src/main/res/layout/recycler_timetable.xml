@@ -61,7 +61,7 @@
                 tools:text="Venue" />
 
             <TextView
-                android:id="@+id/professor"
+                android:id="@+id/faculty"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="10dp"

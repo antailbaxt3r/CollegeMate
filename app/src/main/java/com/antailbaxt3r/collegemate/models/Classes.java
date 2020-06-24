@@ -19,6 +19,9 @@ public class Classes {
     @SerializedName("faculty")
     @Expose
     String faculty;
+    @SerializedName("venue")
+    @Expose
+    String venue;
     @SerializedName("start")
     @Expose
     String start;
@@ -28,6 +31,13 @@ public class Classes {
     @SerializedName("day")
     @Expose
     int day;
+
+    public String getVenue() {
+        return venue;
+    }
+    public void setVenue(String venue) {
+        this.venue = venue;
+    }
 
     public String getClassId() {
         return classId;
