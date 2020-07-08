@@ -3,23 +3,25 @@ package com.antailbaxt3r.collegemate.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class ClassesResponseModel {
-    @SerializedName("subjects")
+import java.util.List;
+
+public class ClassesGetResponseModel {
+    @SerializedName("classes")
     @Expose
-    Classes classes;
+    List<Classes> classes;
     @SerializedName("success")
     @Expose
     boolean success;
 
-    public Classes getClasses() {
+    public List<Classes> getClasses() {
         return classes;
     }
 
-    public void setClasses(Classes classes) {
+    public void setClasses(List<Classes> classes) {
         this.classes = classes;
     }
 
-    public boolean isSuccess() {
+    public boolean getSuccess() {
         return success;
     }
 

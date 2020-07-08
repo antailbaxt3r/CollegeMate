@@ -35,7 +35,7 @@ public class AddSubjectDialogFragment extends BottomSheetDialogFragment{
         try{
             callbacks = (AddSubjectCallbacks) context;
         }catch (ClassCastException e){
-            Log.e("Class Cast Exeption",e.getMessage());
+            Log.e("Class Cast Exception",e.getMessage());
         }
     }
 

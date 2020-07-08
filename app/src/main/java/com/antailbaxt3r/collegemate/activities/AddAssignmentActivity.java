@@ -207,7 +207,7 @@ public class AddAssignmentActivity extends AppCompatActivity {
 
     void uploadImage(byte[] imageBytes, Integer assignmentId){
         RequestBody requestBody = RequestBody.create(MediaType.parse("image/jpeg"),imageBytes);
-        MultipartBody.Part body = MultipartBody.Part.createFormData("image", "image.jpg", requestBody);
+        MultipartBody.Part body = MultipartBody.Part.createFormData("file", "image.jpg", requestBody);
         Call<ImageUploadResponseModel> call = LocalRetrofitClient.getClient().uploadImage(pref.getToken(),body,assignmentId);
         call.enqueue(new Callback<ImageUploadResponseModel>() {
             @Override

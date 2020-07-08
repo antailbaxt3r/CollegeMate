@@ -2,7 +2,8 @@ package com.antailbaxt3r.collegemate.retrofit;
 
 import com.antailbaxt3r.collegemate.models.AssignmentPostResponseModel;
 import com.antailbaxt3r.collegemate.models.AssignmentResponseModel;
-import com.antailbaxt3r.collegemate.models.ClassesResponseModel;
+import com.antailbaxt3r.collegemate.models.ClassesGetResponseModel;
+import com.antailbaxt3r.collegemate.models.ClassesPostResponseModel;
 import com.antailbaxt3r.collegemate.models.ImageUploadResponseModel;
 import com.antailbaxt3r.collegemate.models.SubjectGetResponseModel;
 import com.antailbaxt3r.collegemate.models.SubjectPostResponseModel;
@@ -12,7 +13,6 @@ import com.antailbaxt3r.collegemate.models.UserResponseModel;
 import java.util.Map;
 
 import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
@@ -48,7 +48,9 @@ public interface APIInterface {
     Call<AssignmentPostResponseModel> addAssignment(@Header("token") String token,@Body Map<String,String> map);
 
     @POST("timetable/add")
-    Call<ClassesResponseModel> addClasses(@Header("token") String token, @Body Map<String,String> map);
+    Call<ClassesPostResponseModel> addClasses(@Header("token") String token, @Body Map<String,String> map);
+    @GET("timetable/get")
+    Call<ClassesGetResponseModel> getClasses(@Header("token") String token);
 
     @Multipart
     @POST("assignments/upload")
