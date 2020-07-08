@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import com.antailbaxt3r.collegemate.activities.AssignmentActivity;
 import com.antailbaxt3r.collegemate.activities.SubjectsActivity;
 import com.antailbaxt3r.collegemate.adapters.AssignmentDashboardRecyclerAdapter;
+import com.antailbaxt3r.collegemate.adapters.SubjectDashboardRecyclerAdapter;
 import com.antailbaxt3r.collegemate.adapters.SubjectRecyclerAdapter;
 import com.antailbaxt3r.collegemate.data.GeneralData;
 import com.antailbaxt3r.collegemate.databinding.FragmentDashboardBinding;
@@ -36,7 +37,7 @@ public class DashboardFragment extends Fragment {
     Context context;
     SharedPrefs prefs;
     //Subject Recycler View Adapter
-    SubjectRecyclerAdapter subjectRecyclerAdapter;
+    SubjectDashboardRecyclerAdapter subjectRecyclerAdapter;
 
     //Assignment Recycler View Adapter
     AssignmentDashboardRecyclerAdapter assignmentRecyclerAdapter;
@@ -152,7 +153,7 @@ public class DashboardFragment extends Fragment {
 
         dashboardBinding.subjectRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),
                 LinearLayoutManager.HORIZONTAL,false));
-        subjectRecyclerAdapter = new SubjectRecyclerAdapter(croppedList,context);
+        subjectRecyclerAdapter = new SubjectDashboardRecyclerAdapter(croppedList,context);
         dashboardBinding.subjectRecyclerView.setAdapter(subjectRecyclerAdapter);
     }
 

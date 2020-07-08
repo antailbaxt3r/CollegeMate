@@ -5,6 +5,7 @@ import com.antailbaxt3r.collegemate.models.AssignmentResponseModel;
 import com.antailbaxt3r.collegemate.models.ClassesGetResponseModel;
 import com.antailbaxt3r.collegemate.models.ClassesPostResponseModel;
 import com.antailbaxt3r.collegemate.models.ImageUploadResponseModel;
+import com.antailbaxt3r.collegemate.models.SubjectDeleteResponse;
 import com.antailbaxt3r.collegemate.models.SubjectGetResponseModel;
 import com.antailbaxt3r.collegemate.models.SubjectPostResponseModel;
 import com.antailbaxt3r.collegemate.models.TokenResponseModel;
@@ -15,9 +16,11 @@ import java.util.Map;
 import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.HTTP;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
@@ -41,6 +44,8 @@ public interface APIInterface {
     Call<SubjectGetResponseModel> getSubject(@Header("token") String token);
     @POST("subjects/add")
     Call<SubjectPostResponseModel> addSubject(@Header("token") String token, @Body Map<String,String> map);
+    @HTTP(method = "DELETE", path = "subjects/delete", hasBody = true)
+    Call<SubjectDeleteResponse> deleteSubject(@Header("token") String token, @Body Map<String,Integer> map);
 
     @GET("assignments/get")
     Call<AssignmentResponseModel> getAssignments(@Header("token") String token);
