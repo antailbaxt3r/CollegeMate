@@ -69,7 +69,6 @@ public class DashboardFragment extends Fragment {
         setUpAssignmentViewMore();
 
 
-
         return root;
     }
 

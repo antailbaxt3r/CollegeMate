@@ -1,6 +1,5 @@
 package com.antailbaxt3r.collegemate.activities;
 
-import androidx.annotation.LongDef;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import okhttp3.MediaType;
@@ -29,7 +28,7 @@ import com.antailbaxt3r.collegemate.models.Assignment;
 import com.antailbaxt3r.collegemate.models.AssignmentPostResponseModel;
 import com.antailbaxt3r.collegemate.models.ImageUploadResponseModel;
 import com.antailbaxt3r.collegemate.models.Subject;
-import com.antailbaxt3r.collegemate.retrofit.LocalRetrofitClient;
+import com.antailbaxt3r.collegemate.retrofit.RetrofitClient;
 import com.antailbaxt3r.collegemate.utils.SharedPrefs;
 
 import java.io.ByteArrayOutputStream;
@@ -139,7 +138,7 @@ public class AddAssignmentActivity extends AppCompatActivity {
         data.put("date_due",dueDate);
         data.put("course_code",subjectCode);
 
-        Call<AssignmentPostResponseModel> call = LocalRetrofitClient.getClient().addAssignment(pref.getToken(),data);
+        Call<AssignmentPostResponseModel> call = RetrofitClient.getClient().addAssignment(pref.getToken(),data);
         call.enqueue(new Callback<AssignmentPostResponseModel>() {
             @Override
             public void onResponse(Call<AssignmentPostResponseModel> call, Response<AssignmentPostResponseModel> response) {
@@ -208,7 +207,7 @@ public class AddAssignmentActivity extends AppCompatActivity {
     void uploadImage(byte[] imageBytes, Integer assignmentId){
         RequestBody requestBody = RequestBody.create(MediaType.parse("image/jpeg"),imageBytes);
         MultipartBody.Part body = MultipartBody.Part.createFormData("file", "image.jpg", requestBody);
-        Call<ImageUploadResponseModel> call = LocalRetrofitClient.getClient().uploadImage(pref.getToken(),body,assignmentId);
+        Call<ImageUploadResponseModel> call = RetrofitClient.getClient().uploadImage(pref.getToken(),body,assignmentId);
         call.enqueue(new Callback<ImageUploadResponseModel>() {
             @Override
             public void onResponse(Call<ImageUploadResponseModel> call, Response<ImageUploadResponseModel> response) {

@@ -1,5 +1,6 @@
 package com.antailbaxt3r.collegemate.retrofit;
 
+import com.antailbaxt3r.collegemate.models.AssignmentDeleteResponseModel;
 import com.antailbaxt3r.collegemate.models.AssignmentPostResponseModel;
 import com.antailbaxt3r.collegemate.models.AssignmentResponseModel;
 import com.antailbaxt3r.collegemate.models.ClassesGetResponseModel;
@@ -8,6 +9,7 @@ import com.antailbaxt3r.collegemate.models.ImageUploadResponseModel;
 import com.antailbaxt3r.collegemate.models.SubjectDeleteResponse;
 import com.antailbaxt3r.collegemate.models.SubjectGetResponseModel;
 import com.antailbaxt3r.collegemate.models.SubjectPostResponseModel;
+import com.antailbaxt3r.collegemate.models.ClassesDeleteResponseModel;
 import com.antailbaxt3r.collegemate.models.TokenResponseModel;
 import com.antailbaxt3r.collegemate.models.UserResponseModel;
 
@@ -16,7 +18,6 @@ import java.util.Map;
 import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
-import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -51,11 +52,15 @@ public interface APIInterface {
     Call<AssignmentResponseModel> getAssignments(@Header("token") String token);
     @POST("assignments/add")
     Call<AssignmentPostResponseModel> addAssignment(@Header("token") String token,@Body Map<String,String> map);
+    @HTTP(method = "DELETE", path = "assignments/delete", hasBody = true)
+    Call<AssignmentDeleteResponseModel> deleteAssignment(@Header("token") String token, @Body Map<String,Integer> map);
 
     @POST("timetable/add")
     Call<ClassesPostResponseModel> addClasses(@Header("token") String token, @Body Map<String,String> map);
     @GET("timetable/get")
     Call<ClassesGetResponseModel> getClasses(@Header("token") String token);
+    @HTTP(method = "DELETE", path = "timetable/delete", hasBody = true)
+    Call<ClassesDeleteResponseModel> deleteClasses(@Header("token")String token, @Body Map<String,Integer>map);
 
     @Multipart
     @POST("assignments/upload")
