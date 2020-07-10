@@ -51,4 +51,9 @@ public class SharedPrefs {
         editor.putBoolean(newUser, key);
         editor.commit();
     }
+
+    public void clearData(){
+        editor.clear();
+        editor.commit();
+    }
 }

@@ -11,7 +11,8 @@ import com.antailbaxt3r.collegemate.models.SubjectGetResponseModel;
 import com.antailbaxt3r.collegemate.models.SubjectPostResponseModel;
 import com.antailbaxt3r.collegemate.models.ClassesDeleteResponseModel;
 import com.antailbaxt3r.collegemate.models.TokenResponseModel;
-import com.antailbaxt3r.collegemate.models.UserResponseModel;
+import com.antailbaxt3r.collegemate.models.UserGetResponseModel;
+import com.antailbaxt3r.collegemate.models.UserUpdateResponseModel;
 
 import java.util.Map;
 
@@ -39,7 +40,9 @@ public interface APIInterface {
     Call<TokenResponseModel> getToken(@Field("idToken") String token);
 
     @POST("user/update")
-    Call<UserResponseModel> updateUser(@Header("token") String token, @Body Map<String, String> map);
+    Call<UserUpdateResponseModel> updateUser(@Header("token") String token, @Body Map<String, String> map);
+    @GET("user/get")
+    Call<UserGetResponseModel> getUser(@Header("token") String token);
 
     @GET("subjects/get")
     Call<SubjectGetResponseModel> getSubject(@Header("token") String token);

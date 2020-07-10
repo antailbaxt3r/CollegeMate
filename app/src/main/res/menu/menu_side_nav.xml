@@ -7,10 +7,6 @@
             android:icon="@drawable/profile_icon"
             android:title="@string/my_profile" />
         <item
-            android:id="@+id/nav_polls"
-            android:icon="@drawable/polls_icon"
-            android:title="@string/polls" />
-        <item
             android:id="@+id/nav_about_us"
             android:icon="@drawable/about_us_icon"
             android:title="@string/about_us" />

@@ -9,7 +9,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.antailbaxt3r.collegemate.databinding.ActivityRegisterBinding;
-import com.antailbaxt3r.collegemate.models.UserResponseModel;
+import com.antailbaxt3r.collegemate.models.UserUpdateResponseModel;
 import com.antailbaxt3r.collegemate.retrofit.RetrofitClient;
 import com.antailbaxt3r.collegemate.utils.SharedPrefs;
 
@@ -48,15 +48,15 @@ public class RegisterActivity extends AppCompatActivity {
     private void register() {
         Map<String, String> map = new HashMap<>();
         map.put("enrollment_id", binding.enrollmentId.getText().toString().trim());
-        map.put("phone", binding.enrollmentId.getText().toString().trim());
+        map.put("phone", binding.phone.getText().toString().trim());
         map.put("year_of_study", binding.yearOfStudy.getText().toString().trim());
         map.put("new_user", String.valueOf(false));
-        Call<UserResponseModel> call = RetrofitClient.getClient().updateUser(prefs.getToken(), map);
-        call.enqueue(new Callback<UserResponseModel>() {
+        Call<UserUpdateResponseModel> call = RetrofitClient.getClient().updateUser(prefs.getToken(), map);
+        call.enqueue(new Callback<UserUpdateResponseModel>() {
             @Override
-            public void onResponse(Call<UserResponseModel> call, Response<UserResponseModel> response) {
+            public void onResponse(Call<UserUpdateResponseModel> call, Response<UserUpdateResponseModel> response) {
                 if(response.isSuccessful()){
-                    UserResponseModel userResponse = response.body();
+                    UserUpdateResponseModel userResponse = response.body();
                     prefs.saveNewUser(false);
                     Toast.makeText(RegisterActivity.this, "User Created Successfully!", Toast.LENGTH_SHORT).show();
                     Intent main = new Intent(RegisterActivity.this, MainActivity.class);
@@ -66,7 +66,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<UserResponseModel> call, Throwable t) {
+            public void onFailure(Call<UserUpdateResponseModel> call, Throwable t) {
                 Log.e("CALL Error", t.getMessage());
                 t.printStackTrace();
                 Toast.makeText(RegisterActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
