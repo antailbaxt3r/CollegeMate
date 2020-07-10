@@ -10,13 +10,13 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class AsyncTaskLoadAssignmentImage extends AsyncTask<Object,Object,Object> {
+public class AsyncTaskLoadImage extends AsyncTask<Object,Object,Object> {
     ImageView imageView;
     Context context;
     String imagePath;
     Bitmap bitmap;
 
-    public AsyncTaskLoadAssignmentImage(ImageView imageView, Context context, String imagePath) {
+    public AsyncTaskLoadImage(ImageView imageView, Context context, String imagePath) {
         this.imageView = imageView;
         this.context = context;
         this.imagePath = imagePath;

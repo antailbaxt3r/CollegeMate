@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.antailbaxt3r.collegemate.activities.AssignmentActivity;
+import com.antailbaxt3r.collegemate.activities.LibraryActivity;
 import com.antailbaxt3r.collegemate.activities.SubjectsActivity;
 import com.antailbaxt3r.collegemate.adapters.AssignmentDashboardRecyclerAdapter;
 import com.antailbaxt3r.collegemate.adapters.SubjectDashboardRecyclerAdapter;
@@ -67,6 +68,14 @@ public class DashboardFragment extends Fragment {
 
         setUpSubjectViewMore();
         setUpAssignmentViewMore();
+
+        dashboardBinding.library.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(), LibraryActivity.class);
+                startActivity(i);
+            }
+        });
 
 
         return root;

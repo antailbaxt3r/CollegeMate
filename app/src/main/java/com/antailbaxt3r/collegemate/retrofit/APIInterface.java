@@ -6,6 +6,10 @@ import com.antailbaxt3r.collegemate.models.AssignmentResponseModel;
 import com.antailbaxt3r.collegemate.models.ClassesGetResponseModel;
 import com.antailbaxt3r.collegemate.models.ClassesPostResponseModel;
 import com.antailbaxt3r.collegemate.models.ImageUploadResponseModel;
+import com.antailbaxt3r.collegemate.models.Library;
+import com.antailbaxt3r.collegemate.models.LibraryDeleteResponseModel;
+import com.antailbaxt3r.collegemate.models.LibraryGetResponseModel;
+import com.antailbaxt3r.collegemate.models.LibraryPostResponseModel;
 import com.antailbaxt3r.collegemate.models.SubjectDeleteResponse;
 import com.antailbaxt3r.collegemate.models.SubjectGetResponseModel;
 import com.antailbaxt3r.collegemate.models.SubjectPostResponseModel;
@@ -68,6 +72,14 @@ public interface APIInterface {
     @Multipart
     @POST("assignments/upload")
     Call<ImageUploadResponseModel> uploadImage(@Header("token") String token, @Part MultipartBody.Part body, @Part("assignment_id") Integer id);
+
+    @Multipart
+    @POST("library/add")
+    Call<LibraryPostResponseModel> addLibrary(@Header("token") String token, @Part MultipartBody.Part body, @Part("name") String name, @Part("description") String description);
+    @GET("library/get")
+    Call<LibraryGetResponseModel> getLibrary(@Header("token") String token);
+    @HTTP(method = "DELETE", path = "timetable/delete", hasBody = true)
+    Call<LibraryDeleteResponseModel> deleteLibrary(@Header("token") String token, @Body Map<String,Integer> body);
 
 
 

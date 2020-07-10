@@ -13,7 +13,7 @@ import com.antailbaxt3r.collegemate.databinding.RecyclerAssignmentBinding;
 import com.antailbaxt3r.collegemate.models.Assignment;
 import com.antailbaxt3r.collegemate.models.AssignmentDeleteResponseModel;
 import com.antailbaxt3r.collegemate.retrofit.RetrofitClient;
-import com.antailbaxt3r.collegemate.tasks.AsyncTaskLoadAssignmentImage;
+import com.antailbaxt3r.collegemate.tasks.AsyncTaskLoadImage;
 import com.antailbaxt3r.collegemate.utils.SharedPrefs;
 
 import java.util.HashMap;
@@ -96,7 +96,7 @@ public class AssignmentRecyclerAdapter extends RecyclerView.Adapter<AssignmentRe
         if(data.get(position).getImagePath() == null){
             holder.imageLayout.setVisibility(View.GONE);
         }
-        AsyncTaskLoadAssignmentImage task = new AsyncTaskLoadAssignmentImage(holder.imageView,context,data.get(position).getImagePath());
+        AsyncTaskLoadImage task = new AsyncTaskLoadImage(holder.imageView,context,data.get(position).getImagePath());
 
         task.execute();
 
