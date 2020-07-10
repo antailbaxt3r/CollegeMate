@@ -2,6 +2,7 @@ package com.antailbaxt3r.collegemate.data;
 
 import com.antailbaxt3r.collegemate.models.Assignment;
 import com.antailbaxt3r.collegemate.models.Classes;
+import com.antailbaxt3r.collegemate.models.Library;
 import com.antailbaxt3r.collegemate.models.Subject;
 
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ public class GeneralData {
     public static List<Subject> subjects = new ArrayList<>();
     public static List<Assignment> assignments = new ArrayList<>();
     public static List<Classes> classes = new ArrayList<>();
+    public static List<Library> libraries = new ArrayList<>();
     
     public static List<Subject> getSubjects(){
         return subjects;

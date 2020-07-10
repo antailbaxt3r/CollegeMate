@@ -3,6 +3,8 @@
     package="com.antailbaxt3r.collegemate">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -12,7 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activities.AddClassActivity"></activity>
+        <activity android:name=".activities.AddLibraryActivity"></activity>
+        <activity android:name=".activities.LibraryActivity" />
+        <activity android:name=".activities.AddClassActivity" />
         <activity android:name=".activities.AssignmentActivity" />
         <activity android:name=".activities.AddAssignmentActivity" />
         <activity android:name=".activities.SubjectsActivity" />
@@ -30,6 +34,16 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:grantUriPermissions="true"
+            android:exported="false">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/filepaths" />
+        </provider>
     </application>
 
 </manifest>

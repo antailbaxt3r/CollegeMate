@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_blue"
+    android:orientation="vertical"
+    tools:context=".activities.AddLibraryActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:fontFamily="@font/raleway_bold"
+        android:text="Add Library"
+        android:textSize="36sp" />
+
+    <LinearLayout
+        android:layout_weight="1"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.cardview.widget.CardView
+            android:layout_marginTop="10dp"
+            app:cardCornerRadius="5dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/name"
+                android:layout_marginHorizontal="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Name"/>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_marginTop="10dp"
+            app:cardCornerRadius="5dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/description"
+                android:layout_marginHorizontal="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Description"/>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_marginTop="10dp"
+            app:cardCornerRadius="5dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:focusable="false"
+                android:id="@+id/pdf"
+                android:layout_marginHorizontal="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Select PDF"/>
+        </androidx.cardview.widget.CardView>
+
+        <ProgressBar
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:id="@+id/progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:id="@+id/update"
+            android:layout_margin="10dp"
+            android:layout_gravity="right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_rectangle">
+
+            <TextView
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:layout_gravity="bottom"
+                android:layout_width="match_parent"
+                android:textAlignment="textEnd"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/raleway_reg"
+                android:text="Upload"
+                android:textColor="#FFFFFF"
+                android:textSize="24sp" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+
+
+
+</LinearLayout>

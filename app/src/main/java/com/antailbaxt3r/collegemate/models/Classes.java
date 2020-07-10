@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 public class Classes {
     @SerializedName("class_id")
     @Expose
-    String classId;
+    int classId;
     @SerializedName("course_name")
     @Expose
     String courseName;
@@ -39,11 +39,11 @@ public class Classes {
         this.venue = venue;
     }
 
-    public String getClassId() {
+    public int getClassId() {
         return classId;
     }
 
-    public void setClassId(String classId) {
+    public void setClassId(int classId) {
         this.classId = classId;
     }
 
