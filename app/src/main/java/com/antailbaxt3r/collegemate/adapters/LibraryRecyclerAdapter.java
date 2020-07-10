@@ -1,19 +1,28 @@
 package com.antailbaxt3r.collegemate.adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.antailbaxt3r.collegemate.databinding.RecyclerDashboardItemsBinding;
 import com.antailbaxt3r.collegemate.databinding.RecyclerLibraryBinding;
 import com.antailbaxt3r.collegemate.models.Library;
+import com.antailbaxt3r.collegemate.tasks.AsyncTaskDownloadPdf;
 import com.antailbaxt3r.collegemate.utils.SharedPrefs;
 
+import java.io.File;
+import java.nio.file.Paths;
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class LibraryRecyclerAdapter extends RecyclerView.Adapter<LibraryRecyclerAdapter.ViewHolder> {
@@ -52,6 +61,15 @@ public class LibraryRecyclerAdapter extends RecyclerView.Adapter<LibraryRecycler
             super(itemView);
             name = binding.name;
             description = binding.description;
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @RequiresApi(api = Build.VERSION_CODES.O)
+                @Override
+                public void onClick(View view) {
+                    AsyncTaskDownloadPdf task = new AsyncTaskDownloadPdf(data.get(getAdapterPosition()).getPath(),context);
+                    task.execute();
+                }
+            });
         }
     }
 
@@ -60,4 +78,5 @@ public class LibraryRecyclerAdapter extends RecyclerView.Adapter<LibraryRecycler
         holder.name.setText(library.getName());
         holder.description.setText(library.getDescription());
     }
+
 }

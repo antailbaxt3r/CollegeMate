@@ -19,8 +19,8 @@ import retrofit2.Callback;
 
 public class LibraryCtrl {
 
-    public static void postLibrary(Library library, String token, byte[] image, Callback<LibraryPostResponseModel> callback){
-        RequestBody requestBody = RequestBody.create(MediaType.parse("pdf"),image);
+    public static void postLibrary(Library library, String token, byte[] pdf, Callback<LibraryPostResponseModel> callback){
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/pdf"),pdf);
         MultipartBody.Part part = MultipartBody.Part.createFormData("file","library.pdf",requestBody);
         Call<LibraryPostResponseModel> call = RetrofitClient.getClient().addLibrary(token,part,library.getName(),library.getDescription());
 
